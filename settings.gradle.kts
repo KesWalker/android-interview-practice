@@ -16,3 +16,9 @@ dependencyResolutionManagement {
 // One module per topic. Each is self-contained: open the root once in Android
 // Studio (or IntelliJ) and run any topic on its own.
 include(":null-safety")
+include(":coroutines-basics")
+include(":extensions")
+include(":generics-variance")
+include(":kotlin-classes")
+include(":lambdas-inline")
+include(":scope-functions")
