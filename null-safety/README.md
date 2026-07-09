@@ -21,12 +21,13 @@ to a test class, or from a terminal:
 ## The tasks
 
 All the work is in `src/main/kotlin/nullsafety/Tasks.kt`. No `!!` allowed — each one
-has an idiomatic one-liner.
+has an idiomatic one-liner. Work out the idiom yourself, or pair with the tutor and
+let it nudge you toward it.
 
-1. **`safeLength`** (`SafeLengthTest`) — length of a nullable string, or 0. Safe call + elvis.
-2. **`greetingFor`** (`GreetingTest`) — greet by name, fall back when null/blank. Elvis default.
-3. **`validAges`** (`ValidAgesTest`) — keep only the strings that parse as `Int`. `mapNotNull { it.toIntOrNull() }`.
-4. **`shout`** (`ShoutTest`) — uppercase only when it's a `String`, else null. Safe cast `as?`.
+1. **`safeLength`** (`SafeLengthTest`) — length of a nullable string, or 0.
+2. **`greetingFor`** (`GreetingTest`) — greet by name, fall back when null or blank.
+3. **`validAges`** (`ValidAgesTest`) — keep only the strings that parse as `Int`.
+4. **`shout`** (`ShoutTest`) — uppercase only when it's a `String`, else null.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

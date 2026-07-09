@@ -26,7 +26,7 @@ Each module is independent: you can do them in any order, and each has its own
 
 | Module | Topic | What you practise |
 | --- | --- | --- |
-| [`null-safety/`](null-safety) | Null Safety | `?.`, `?:`, `mapNotNull`, `as?` — no `!!` |
+| [`null-safety/`](null-safety) | Null Safety | Null-safe Kotlin the interview way — no `!!` |
 
 More topics are added as their modules land. Language topics are plain Kotlin/JVM
 modules (fast, no emulator); Android-specific topics ship as Android modules.
