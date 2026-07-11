@@ -16,22 +16,22 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :threading:test                       # run everything
-./gradlew :threading:test --tests "*MessageLoopTest"   # one task
+./gradlew :threading:test --tests "*T1MessageLoopTest"   # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/threading/Tasks.kt`.
 
-1. **`MessageLoop`** (`MessageLoopTest`) — drains posted actions in the order
+1. **`MessageLoop`** (`T1MessageLoopTest`) — drains posted actions in the order
    they arrived, including ones posted while it's already running.
-2. **`BackgroundWorker`** (`BackgroundWorkerTest`) — runs posted actions one at
+2. **`BackgroundWorker`** (`T2BackgroundWorkerTest`) — runs posted actions one at
    a time on its own dedicated thread, safely accepting posts from any caller.
-3. **`DelayedQueue`** (`DelayedQueueTest`) — schedules actions for a target
+3. **`DelayedQueue`** (`T3DelayedQueueTest`) — schedules actions for a target
    time and runs only the ones that are due, earliest first.
-4. **`StoppableQueue`** (`StoppableQueueTest`) — can be stopped by dropping
+4. **`StoppableQueue`** (`T4StoppableQueueTest`) — can be stopped by dropping
    everything, or by running what's already due first and dropping the rest.
-5. **`IdleAwareQueue`** (`IdleAwareQueueTest`) — mirrors
+5. **`IdleAwareQueue`** (`T5IdleAwareQueueTest`) — mirrors
    `MessageQueue.addIdleHandler`: fires an idle listener once, exactly when
    there's no more pending work left to run.
 

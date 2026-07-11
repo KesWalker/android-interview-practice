@@ -11,7 +11,7 @@ package concurrentcoll
  *     ./gradlew :concurrent-collections:test
  */
 
-// TODO(t1): RoomKeyLookupTest
+// TODO(t1): T1RoomKeyLookupTest
 // A map key type: two RoomKeys should be treated as the same key whenever
 // their building and room match.
 class RoomKey(val building: String, val room: Int) {
@@ -24,7 +24,7 @@ class RoomKey(val building: String, val room: Int) {
     }
 }
 
-// TODO(t2): HitCounterTest
+// TODO(t2): T2HitCounterTest
 // A counter keyed by name; many threads may call record() for the same key
 // at the same time and no hit should ever be lost.
 class HitCounter {
@@ -37,7 +37,7 @@ class HitCounter {
     fun countFor(key: String): Int = counts[key] ?: 0
 }
 
-// TODO(t3): ComputeOnceCacheTest
+// TODO(t3): T3ComputeOnceCacheTest
 // A cache that computes a value for a key on first request and reuses it
 // after that; concurrent requests for the same missing key must still only
 // trigger one computation.
@@ -49,7 +49,7 @@ class ComputeOnceCache {
     }
 }
 
-// TODO(t4): SafeDirectoryTest
+// TODO(t4): T4SafeDirectoryTest
 // A key/value directory that many threads read and write at once: writes
 // must exclude everything else, but reads may run alongside other reads.
 class SafeDirectory {

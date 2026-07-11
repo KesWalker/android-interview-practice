@@ -17,7 +17,7 @@ next to a test class, or from a terminal:
 
 ```bash
 ./gradlew :coroutines-basics:test                          # run everything
-./gradlew :coroutines-basics:test --tests "*FetchGreetingTest"   # one task
+./gradlew :coroutines-basics:test --tests "*T1FetchGreetingTest"   # one task
 ```
 
 ## The tasks
@@ -25,12 +25,12 @@ next to a test class, or from a terminal:
 All the work is in `src/main/kotlin/coroutines/Tasks.kt`. Work out the idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`fetchGreeting`** (`FetchGreetingTest`) — suspend, simulate latency, return a greeting.
-2. **`sumConcurrently`** (`SumConcurrentlyTest`) — run two suspend functions at the same time and combine their results.
-3. **`runOn`** (`RunOnTest`) — run a block on a given dispatcher and return its result.
-4. **`countTicks`** (`CountTicksTest`) — count ticks but stop early if the coroutine is cancelled.
-5. **`fireAndForget`** (`FireAndForgetTest`) — launch a suspend block on a scope and hand back its Job without waiting.
-6. **`blockingCall`** (`BlockingCallTest`) — bridge a suspend block into ordinary blocking code with runBlocking.
+1. **`fetchGreeting`** (`T1FetchGreetingTest`) — suspend, simulate latency, return a greeting.
+2. **`sumConcurrently`** (`T2SumConcurrentlyTest`) — run two suspend functions at the same time and combine their results.
+3. **`runOn`** (`T3RunOnTest`) — run a block on a given dispatcher and return its result.
+4. **`countTicks`** (`T4CountTicksTest`) — count ticks but stop early if the coroutine is cancelled.
+5. **`fireAndForget`** (`T5FireAndForgetTest`) — launch a suspend block on a scope and hand back its Job without waiting.
+6. **`blockingCall`** (`T6BlockingCallTest`) — bridge a suspend block into ordinary blocking code with runBlocking.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

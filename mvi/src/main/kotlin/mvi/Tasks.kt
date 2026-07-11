@@ -28,7 +28,7 @@ sealed interface CounterIntent {
     data object ClearError : CounterIntent
 }
 
-// TODO(t1): ReduceCounterTest
+// TODO(t1): T1ReduceCounterTest
 // Given the current state and an intent, compute and return the next state:
 // Increment/Decrement change count by one, Fail sets error, ClearError clears
 // it, and neither of those two touches count.
@@ -36,7 +36,7 @@ fun reduceCounter(state: CounterState, intent: CounterIntent): CounterState {
     TODO("t1: return the next CounterState for (state, intent)")
 }
 
-// TODO(t2): CounterStoreTest
+// TODO(t2): T2CounterStoreTest
 // Holds the current state and exposes it for reading; `dispatch` is the one
 // entry point every intent goes through to produce and publish the next state.
 class CounterStore(initial: CounterState = CounterState()) {
@@ -79,7 +79,7 @@ interface UserRepository {
     suspend fun fetchUser(id: String): String
 }
 
-// TODO(t3): LoadUserTest
+// TODO(t3): T3LoadUserTest
 // Announce that loading has started, await the repository call, then fold its
 // outcome back in: the fetched name on success, or its error message on
 // failure. The repository call itself must stay outside any reducer.
@@ -96,7 +96,7 @@ class CartEffects {
     private val channel = Channel<CartEffect>(Channel.BUFFERED)
     val effects: Flow<CartEffect> = channel.receiveAsFlow()
 
-    // TODO(t4): CartEffectsTest
+    // TODO(t4): T4CartEffectsTest
     // Announce that `itemName` was added to the cart as a "<itemName> added to
     // cart" message, delivered through `effects` rather than any state field.
     suspend fun addToCart(itemName: String) {

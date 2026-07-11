@@ -16,7 +16,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :interceptors:test                              # run everything
-./gradlew :interceptors:test --tests "*ChainExecutionTest"   # one task
+./gradlew :interceptors:test --tests "*T1ChainExecutionTest"   # one task
 ```
 
 ## The tasks
@@ -24,18 +24,18 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/interceptors/Tasks.kt`. Work out each idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`executeChain`** (`ChainExecutionTest`) — run a list of interceptors in order,
+1. **`executeChain`** (`T1ChainExecutionTest`) — run a list of interceptors in order,
    ending in a network call, respecting an interceptor that stops early.
-2. **`authInterceptor`** (`AuthInterceptorTest`) — attach a bearer token header to
+2. **`authInterceptor`** (`T2AuthInterceptorTest`) — attach a bearer token header to
    every request before continuing.
-3. **`cachingInterceptor`** (`CachingInterceptorTest`) — serve a stored response
+3. **`cachingInterceptor`** (`T3CachingInterceptorTest`) — serve a stored response
    without continuing, or continue and store the result for next time.
-4. **`retryOnUnauthorized`** (`RetryOnUnauthorizedTest`) — refresh the token and
+4. **`retryOnUnauthorized`** (`T4RetryOnUnauthorizedTest`) — refresh the token and
    retry once when the response comes back unauthorized.
-5. **`offlineFallbackInterceptor`** (`OfflineFallbackInterceptorTest`) — serve a
+5. **`offlineFallbackInterceptor`** (`T5OfflineFallbackInterceptorTest`) — serve a
    cached response for a request's path only when offline, otherwise always go
    to the network.
-6. **`verifyCertificatePin`** (`VerifyCertificatePinTest`) — check a host's
+6. **`verifyCertificatePin`** (`T6VerifyCertificatePinTest`) — check a host's
    actual certificate hash against its pinned accepted hashes, failing closed
    on a mismatch.
 

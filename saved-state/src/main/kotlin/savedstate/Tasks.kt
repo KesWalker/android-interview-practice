@@ -21,7 +21,7 @@ data class UiState(
     val diskField: String?
 )
 
-// TODO(t1): SaveStateTest
+// TODO(t1): T1SaveStateTest
 // Given a raw UI-state map, keep only the entries whose value can actually be
 // written into saved state: String, Int, Long, Double, Float, Boolean, null,
 // or a List whose elements are all one of those types. Drop every other
@@ -30,7 +30,7 @@ fun saveState(state: Map<String, Any?>): Map<String, Any?> {
     TODO("t1: keep only entries whose value is a saved-state-safe type")
 }
 
-// TODO(t2): RestoreStateTest
+// TODO(t2): T2RestoreStateTest
 // Rebuild the current UI state from `defaults` (the full set of fields this
 // screen needs) and `saved` (what was recovered from saved state). For every
 // key in `defaults`, use the value from `saved` when that key is present
@@ -40,7 +40,7 @@ fun restoreState(saved: Map<String, Any?>, defaults: Map<String, Any?>): Map<Str
     TODO("t2: fill in defaults' keys from saved, falling back to defaults")
 }
 
-// TODO(t3): SizeLimitTest
+// TODO(t3): T3SizeLimitTest
 // Estimate the byte size of `state`: 2 bytes per character in every key and
 // every String value, 4 bytes for an Int or Float value, 8 bytes for a Long
 // or Double value, 1 byte for a Boolean value, 0 bytes for a null value, and
@@ -51,7 +51,7 @@ fun ensureWithinSizeLimit(state: Map<String, Any?>, maxBytes: Int): Map<String, 
     TODO("t3: throw StateTooLargeException when state's estimated size exceeds maxBytes")
 }
 
-// TODO(t4): RecreateTest
+// TODO(t4): T4RecreateTest
 // Simulate what `state` looks like after Android recreates the screen. When
 // `killedProcess` is true, the in-memory `viewModelField` is lost (becomes
 // null) while `savedStateField` and `diskField` are unaffected. When

@@ -19,7 +19,7 @@ interface UserStore {
     fun all(): List<User>
 }
 
-// TODO(t1): InMemoryUserStoreTest
+// TODO(t1): T1InMemoryUserStoreTest
 // A working in-memory UserStore that actually remembers what's saved and reports on it accurately.
 class InMemoryUserStore : UserStore {
     override fun exists(email: String): Boolean {
@@ -39,7 +39,7 @@ interface EmailSender {
     fun send(to: String, subject: String): Boolean
 }
 
-// TODO(t2): StubEmailSenderTest
+// TODO(t2): T2StubEmailSenderTest
 // An EmailSender that always returns the same preconfigured result, no matter what it's asked to send.
 class StubEmailSender(private val result: Boolean) : EmailSender {
     override fun send(to: String, subject: String): Boolean {
@@ -47,7 +47,7 @@ class StubEmailSender(private val result: Boolean) : EmailSender {
     }
 }
 
-// TODO(t3): SpyEmailSenderTest
+// TODO(t3): T3SpyEmailSenderTest
 // An EmailSender that records every call it receives, then forwards it to a wrapped EmailSender and returns its result.
 class SpyEmailSender(private val delegate: EmailSender) : EmailSender {
     val sentMessages = mutableListOf<Pair<String, String>>()
@@ -61,7 +61,7 @@ const val WELCOME_SUBJECT = "Welcome!"
 
 enum class SignupResult { ALREADY_REGISTERED, SUCCESS, EMAIL_FAILED }
 
-// TODO(t4): SignupServiceTest
+// TODO(t4): T4SignupServiceTest
 // A service that registers a new email, skips duplicates, and reports whether the welcome email went out.
 class SignupService(private val userStore: UserStore, private val emailSender: EmailSender) {
     fun signUp(email: String, name: String): SignupResult {

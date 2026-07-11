@@ -18,7 +18,7 @@ next to a test class, or from a terminal:
 
 ```bash
 ./gradlew :coroutines-structured:test                              # run everything
-./gradlew :coroutines-structured:test --tests "*RunTogetherOrFailAllTest"  # one task
+./gradlew :coroutines-structured:test --tests "*T1RunTogetherOrFailAllTest"  # one task
 ```
 
 ## The tasks
@@ -26,12 +26,12 @@ next to a test class, or from a terminal:
 All the work is in `src/main/kotlin/structured/Tasks.kt`. Work out the idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`runTogetherOrFailAll`** (`RunTogetherOrFailAllTest`) — run every task at once; one failure fails the call and stops the rest.
-2. **`processWithCleanup`** (`ProcessWithCleanupTest`) — run work, then always run cleanup, even on failure or cancellation.
-3. **`runIsolatedReporting`** (`RunIsolatedReportingTest`) — run every task at once, routing a failure to a callback without stopping the others.
-4. **`loadAllResults`** (`LoadAllResultsTest`) — run every task at once, collecting a success-or-failure result per task in order.
-5. **`sumReportingErrors`** (`SumReportingErrorsTest`) — sum entries, reporting ordinary exceptions to a callback without ever swallowing cancellation.
-6. **`runWithDeadline`** (`RunWithDeadlineTest`) — run work, cancelling and failing the call if it exceeds a deadline.
+1. **`runTogetherOrFailAll`** (`T1RunTogetherOrFailAllTest`) — run every task at once; one failure fails the call and stops the rest.
+2. **`processWithCleanup`** (`T2ProcessWithCleanupTest`) — run work, then always run cleanup, even on failure or cancellation.
+3. **`runIsolatedReporting`** (`T3RunIsolatedReportingTest`) — run every task at once, routing a failure to a callback without stopping the others.
+4. **`loadAllResults`** (`T4LoadAllResultsTest`) — run every task at once, collecting a success-or-failure result per task in order.
+5. **`sumReportingErrors`** (`T5SumReportingErrorsTest`) — sum entries, reporting ordinary exceptions to a callback without ever swallowing cancellation.
+6. **`runWithDeadline`** (`T6RunWithDeadlineTest`) — run work, cancelling and failing the call if it exceeds a deadline.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

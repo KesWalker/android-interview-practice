@@ -15,26 +15,26 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :test-doubles:test                          # run everything
-./gradlew :test-doubles:test --tests "*SignupServiceTest"   # one task
+./gradlew :test-doubles:test --tests "*T4SignupServiceTest"   # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/doubles/Tasks.kt`.
 
-1. **`InMemoryUserStore`** (`InMemoryUserStoreTest`) — a working in-memory
+1. **`InMemoryUserStore`** (`T1InMemoryUserStoreTest`) — a working in-memory
    `UserStore` that actually remembers saved users and reports on them.
-2. **`StubEmailSender`** (`StubEmailSenderTest`) — an `EmailSender` that always
+2. **`StubEmailSender`** (`T2StubEmailSenderTest`) — an `EmailSender` that always
    returns the same preconfigured result, whatever it's asked to send.
-3. **`SpyEmailSender`** (`SpyEmailSenderTest`) — an `EmailSender` that records
+3. **`SpyEmailSender`** (`T3SpyEmailSenderTest`) — an `EmailSender` that records
    every call it receives, then forwards it to a wrapped sender.
-4. **`SignupService`** (`SignupServiceTest`) — a service that registers a new
+4. **`SignupService`** (`T4SignupServiceTest`) — a service that registers a new
    email, skips duplicates, and reports whether the welcome email went out,
    tested by wiring the fake and spy from tasks 1-3 together.
-5. **`ScriptedEmailSender`** (`ScriptedEmailSenderTest`) — a hand-rolled
+5. **`ScriptedEmailSender`** (`T5ScriptedEmailSenderTest`) — a hand-rolled
    strict mock: an `EmailSender` that must be explicitly stubbed before use,
    and fails loudly on an unstubbed call instead of returning a default.
-6. **`validateSignupEmail`** (`ValidateSignupEmailTest`) — reject an obviously
+6. **`validateSignupEmail`** (`T6ValidateSignupEmailTest`) — reject an obviously
    invalid email before it reaches the store or the email sender.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

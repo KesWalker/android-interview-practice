@@ -30,7 +30,7 @@ sealed interface ScreenStatus {
     data class Content(val items: List<String>) : ScreenStatus
 }
 
-// TODO(t1): ScreenStatusTest
+// TODO(t1): T1ScreenStatusTest
 // Collapse FeedUiState's separate fields into exactly one ScreenStatus: an
 // error message wins over everything else, then loading, then an empty list,
 // and only then the actual content.
@@ -45,7 +45,7 @@ fun cartTotalCents(items: List<CartItem>): Int = items.sumOf { it.priceCents * i
 
 data class CartUiState(val items: List<CartItem>, val totalLabel: String)
 
-// TODO(t2): CartUiStateTest
+// TODO(t2): T2CartUiStateTest
 // Build the screen's state from the raw cart items: keep the items as-is, and
 // turn the total cost into a display string like "$12.99" (or "$0.00" when
 // there's nothing in the cart).
@@ -59,7 +59,7 @@ class FavoritesViewModel {
     private val _state = MutableStateFlow(FavoritesUiState())
     val state: StateFlow<FavoritesUiState> = _state.asStateFlow()
 
-    // TODO(t3): FavoritesViewModelTest
+    // TODO(t3): T3FavoritesViewModelTest
     // Flip whether `id` is currently in the favorited set, correctly even when
     // many callers do this at the same time.
     fun toggleFavorite(id: String) {
@@ -69,7 +69,7 @@ class FavoritesViewModel {
 
 data class SearchUiState(val query: String, val onlyFavorites: Boolean, val results: List<String>)
 
-// TODO(t4): SearchUiStateTest
+// TODO(t4): T4SearchUiStateTest
 // Derive one running SearchUiState from the current query and favorites
 // toggle: results are the names from allItems whose name contains the query
 // (case-insensitively), further restricted to favorites when the toggle is on.

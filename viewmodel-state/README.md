@@ -16,7 +16,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :viewmodel-state:test                            # run everything
-./gradlew :viewmodel-state:test --tests "*ToUiStateTest"    # one task
+./gradlew :viewmodel-state:test --tests "*T1ToUiStateTest"    # one task
 ```
 
 ## The tasks
@@ -24,11 +24,11 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/statelogic/Tasks.kt`. Work out the idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`toUiState`** (`ToUiStateTest`) — turn a `Result` into a Loading/Content/Error state.
-2. **`UiStateHolder`** (`UiStateHolderTest`) — publish state safely as a screen loads.
-3. **`ClearableHolder`** (`ClearableHolderTest`) — shut down all background work at once.
-4. **`SingleFlightLoader`** (`SingleFlightLoaderTest`) — share one in-flight fetch instead of duplicating it.
-5. **`FakeSavedStateHandle`** (`FakeSavedStateHandleTest`) — an observable, saved-state-backed value, the `savedStateHandle.getStateFlow` idiom.
+1. **`toUiState`** (`T1ToUiStateTest`) — turn a `Result` into a Loading/Content/Error state.
+2. **`UiStateHolder`** (`T2UiStateHolderTest`) — publish state safely as a screen loads.
+3. **`ClearableHolder`** (`T3ClearableHolderTest`) — shut down all background work at once.
+4. **`SingleFlightLoader`** (`T4SingleFlightLoaderTest`) — share one in-flight fetch instead of duplicating it.
+5. **`FakeSavedStateHandle`** (`T5FakeSavedStateHandleTest`) — an observable, saved-state-backed value, the `savedStateHandle.getStateFlow` idiom.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

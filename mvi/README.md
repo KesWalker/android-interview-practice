@@ -14,24 +14,24 @@ next to a test class, or from a terminal:
 
 ```bash
 ./gradlew :mvi:test                                 # run everything
-./gradlew :mvi:test --tests "*ReduceCounterTest"     # one task
+./gradlew :mvi:test --tests "*T1ReduceCounterTest"     # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/mvi/Tasks.kt`.
 
-1. **`reduceCounter`** (`ReduceCounterTest`) — given the current state and an
+1. **`reduceCounter`** (`T1ReduceCounterTest`) — given the current state and an
    intent, compute and return the next state.
-2. **`CounterStore.dispatch`** (`CounterStoreTest`) — the one entry point every
+2. **`CounterStore.dispatch`** (`T2CounterStoreTest`) — the one entry point every
    intent goes through to produce and publish the next state.
-3. **`loadUser`** (`LoadUserTest`) — run an async fetch outside the reducer,
+3. **`loadUser`** (`T3LoadUserTest`) — run an async fetch outside the reducer,
    then fold its outcome back in as a new intent.
-4. **`CartEffects.addToCart`** (`CartEffectsTest`) — announce a one-off effect
+4. **`CartEffects.addToCart`** (`T4CartEffectsTest`) — announce a one-off effect
    through a dedicated channel instead of state.
-5. **`reduceForm`** (`ReduceFormTest`) — a reducer that stays pure by taking its
+5. **`reduceForm`** (`T5ReduceFormTest`) — a reducer that stays pure by taking its
    timestamp from the intent instead of the wall clock.
-6. **`loadProfile`** (`ProfileStoreTest`) — fold two independent async results into
+6. **`loadProfile`** (`T6ProfileStoreTest`) — fold two independent async results into
    one state via a single intent.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk

@@ -11,7 +11,7 @@ package properties
  *     ./gradlew :properties:test
  */
 
-// TODO(t1): LazyConfigTest
+// TODO(t1): T1LazyConfigTest
 // `value` should call `loader` to get its result, but only the first time it's
 // read, no matter how many times it's read after that.
 class LazyConfig(private val loader: () -> String) {
@@ -19,7 +19,7 @@ class LazyConfig(private val loader: () -> String) {
         get() = TODO("t1: return loader()'s result, computed once and reused on every later read")
 }
 
-// TODO(t2): SessionGreetingTest
+// TODO(t2): T2SessionGreetingTest
 // Greet `username` by name once it's been assigned, otherwise greet a stranger.
 class UserSession {
     lateinit var username: String
@@ -29,7 +29,7 @@ class UserSession {
     }
 }
 
-// TODO(t3): TrimmedBioTest
+// TODO(t3): T3TrimmedBioTest
 // Whatever `bio` is assigned, what's actually stored (and later read back)
 // should have its leading and trailing whitespace removed.
 class Profile {
@@ -39,7 +39,7 @@ class Profile {
         }
 }
 
-// TODO(t4): TodoListItemsTest
+// TODO(t4): T4TodoListItemsTest
 // Expose the items this class holds as a read-only list, while still letting
 // this class add to them internally via `add`.
 class TodoList {

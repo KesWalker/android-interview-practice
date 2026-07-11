@@ -17,7 +17,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :extensions:test                          # run everything
-./gradlew :extensions:test --tests "*DisplayNameTest"   # one task
+./gradlew :extensions:test --tests "*T1DisplayNameTest"   # one task
 ```
 
 ## The tasks
@@ -26,17 +26,17 @@ All the work is in `src/main/kotlin/extensions/Tasks.kt`. No `!!` allowed — ea
 has a short idiomatic solution. Work it out yourself, or pair with the tutor and let
 it nudge you toward the idiom.
 
-1. **`displayNameOrUnknown`** (`DisplayNameTest`) — extension function on a nullable
+1. **`displayNameOrUnknown`** (`T1DisplayNameTest`) — extension function on a nullable
    `String?` receiver, with a sensible fallback.
-2. **`wordCount`** (`WordCountTest`) — an extension property with an explicit getter,
+2. **`wordCount`** (`T2WordCountTest`) — an extension property with an explicit getter,
    no backing field.
-3. **`Point.get`** (`PointIndexingTest`) — an `operator` function declared as an
+3. **`Point.get`** (`T3PointIndexingTest`) — an `operator` function declared as an
    extension, wiring up `point[i]` indexing.
-4. **`Meters.parse`** (`MetersParseTest`) — an extension on a companion object, so it
+4. **`Meters.parse`** (`T4MetersParseTest`) — an extension on a companion object, so it
    reads like a static factory call.
-5. **`kindsOf`** (`KindsOfTest`) — extensions resolve on the declared type of a
+5. **`kindsOf`** (`T5KindsOfTest`) — extensions resolve on the declared type of a
    reference, not its runtime type, unlike a real virtual member.
-6. **`greetTwice`** (`GreetTwiceTest`) — a member function always wins over an
+6. **`greetTwice`** (`T6GreetTwiceTest`) — a member function always wins over an
    extension declared with the same signature.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

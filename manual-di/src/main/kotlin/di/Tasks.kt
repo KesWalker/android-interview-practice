@@ -36,13 +36,13 @@ class UserService(val repository: UserRepository, val logger: Logger) {
     }
 }
 
-// TODO(t1): ManualWiringTest
+// TODO(t1): T1ManualWiringTest
 // Build a fully-wired UserService, with the whole graph sharing one Logger instance.
 fun buildUserService(): UserService {
     TODO("t1: construct Logger, UserRepository, and UserService, sharing a single Logger instance across the graph")
 }
 
-// TODO(t2): SingletonScopeTest
+// TODO(t2): T2SingletonScopeTest
 // A provider that hands back the same instance on every call.
 class SingletonProvider<T>(private val factory: () -> T) {
     fun get(): T {
@@ -50,7 +50,7 @@ class SingletonProvider<T>(private val factory: () -> T) {
     }
 }
 
-// TODO(t3): FactoryScopeTest
+// TODO(t3): T3FactoryScopeTest
 // A provider that hands back a new instance on every call.
 class FactoryProvider<T>(private val factory: () -> T) {
     fun get(): T {
@@ -58,7 +58,7 @@ class FactoryProvider<T>(private val factory: () -> T) {
     }
 }
 
-// TODO(t4): ContainerResolutionTest
+// TODO(t4): T4ContainerResolutionTest
 // A tiny container mapping string keys to providers.
 class Container {
     private val providers = mutableMapOf<String, () -> Any>()

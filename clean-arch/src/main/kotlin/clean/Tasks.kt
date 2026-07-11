@@ -40,7 +40,7 @@ fun interface FetchArticles {
     suspend operator fun invoke(): List<Article>
 }
 
-// TODO(t1): GetUserUseCaseTest
+// TODO(t1): T1GetUserUseCaseTest
 // WHAT: look up a user by id, or null when no such user exists.
 class GetUserUseCase(private val userRepository: UserRepository) {
     suspend operator fun invoke(id: String): User? {
@@ -48,7 +48,7 @@ class GetUserUseCase(private val userRepository: UserRepository) {
     }
 }
 
-// TODO(t2): GetArticlesWithAuthorsUseCaseTest
+// TODO(t2): T2GetArticlesWithAuthorsUseCaseTest
 // WHAT: pair every article with its author's name, leaving out any article
 // whose author can't be found.
 class GetArticlesWithAuthorsUseCase(
@@ -60,7 +60,7 @@ class GetArticlesWithAuthorsUseCase(
     }
 }
 
-// TODO(t3): GetUserFeedUseCaseTest
+// TODO(t3): T3GetUserFeedUseCaseTest
 // WHAT: build a user's feed from their profile and the article list, or null
 // when the user can't be found.
 class GetUserFeedUseCase(
@@ -72,7 +72,7 @@ class GetUserFeedUseCase(
     }
 }
 
-// TODO(t4): CalculateTotalUseCaseTest
+// TODO(t4): T4CalculateTotalUseCaseTest
 // WHAT: multiply price by quantity, running the calculation via the supplied
 // dispatcher instead of whatever context called it.
 class CalculateTotalUseCase(private val dispatcher: CoroutineDispatcher) {

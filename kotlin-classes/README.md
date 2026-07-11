@@ -15,7 +15,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :kotlin-classes:test                                # run everything
-./gradlew :kotlin-classes:test --tests "*EmployeeEqualityTest"   # one task
+./gradlew :kotlin-classes:test --tests "*T1EmployeeEqualityTest"   # one task
 ```
 
 ## The tasks
@@ -23,13 +23,13 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/classes/Tasks.kt`. Each solution is short - work
 out the idiom yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`sameEmployee`** (`EmployeeEqualityTest`) - decide equality for two employee records where one property lives outside the primary constructor.
-2. **`moved`** (`MovedPointTest`) - produce a shifted copy of a point without touching the original.
-3. **`statusMessage`** (`DeliveryStatusMessageTest`) - map every stage of a closed delivery-status hierarchy to its message.
-4. **`doubled`** (`DoubleDistanceTest`) - double a wrapped distance value and hand back the same wrapper type.
-5. **`toPair`** (`ToPairTest`) - destructure a data class into a Pair via componentN().
-6. **`renamedWithIndependentMembers`** (`RenamedWithIndependentMembersTest`) - copy a data class while avoiding the shallow-copy gotcha on a mutable property.
-7. **`nextLight`** (`NextLightTest`) - cycle an enum's states, choosing enum over sealed for a same-shape closed set.
+1. **`sameEmployee`** (`T1EmployeeEqualityTest`) - decide equality for two employee records where one property lives outside the primary constructor.
+2. **`moved`** (`T2MovedPointTest`) - produce a shifted copy of a point without touching the original.
+3. **`statusMessage`** (`T3DeliveryStatusMessageTest`) - map every stage of a closed delivery-status hierarchy to its message.
+4. **`doubled`** (`T4DoubleDistanceTest`) - double a wrapped distance value and hand back the same wrapper type.
+5. **`toPair`** (`T5ToPairTest`) - destructure a data class into a Pair via componentN().
+6. **`renamedWithIndependentMembers`** (`T6RenamedWithIndependentMembersTest`) - copy a data class while avoiding the shallow-copy gotcha on a mutable property.
+7. **`nextLight`** (`T7NextLightTest`) - cycle an enum's states, choosing enum over sealed for a same-shape closed set.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

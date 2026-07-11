@@ -11,7 +11,7 @@ package threading
  *     ./gradlew :threading:test
  */
 
-// TODO(t1): MessageLoopTest
+// TODO(t1): T1MessageLoopTest
 // A queue of pending actions. Running it executes every pending action in the
 // order it was posted, and if an action posts more work while the queue is
 // running, that new work still waits its turn instead of running immediately.
@@ -25,7 +25,7 @@ class MessageLoop {
     }
 }
 
-// TODO(t2): BackgroundWorkerTest
+// TODO(t2): T2BackgroundWorkerTest
 // A worker with its own dedicated thread. Any caller, from any thread, can
 // hand it an action; the worker runs every action it is given, one at a time,
 // on that one dedicated thread.
@@ -43,7 +43,7 @@ class BackgroundWorker {
     }
 }
 
-// TODO(t3): DelayedQueueTest
+// TODO(t3): T3DelayedQueueTest
 // A queue where every action is scheduled for a target time. Running it up to
 // a given time executes only the actions whose target time has arrived,
 // earliest target time first.
@@ -57,7 +57,7 @@ class DelayedQueue {
     }
 }
 
-// TODO(t4): StoppableQueueTest
+// TODO(t4): T4StoppableQueueTest
 // A queue that can be stopped two different ways: drop every pending action
 // immediately, or run whatever is already due and only then drop the rest.
 class StoppableQueue {

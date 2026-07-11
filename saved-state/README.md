@@ -18,18 +18,18 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :saved-state:test                       # run everything
-./gradlew :saved-state:test --tests "*SaveStateTest"   # one task
+./gradlew :saved-state:test --tests "*T1SaveStateTest"   # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/savedstate/Tasks.kt`.
 
-1. **`saveState`** (`SaveStateTest`) — keep only the values that can actually go into saved state, drop the rest.
-2. **`restoreState`** (`RestoreStateTest`) — rebuild a screen's state from what was saved, falling back to defaults for anything missing.
-3. **`ensureWithinSizeLimit`** (`SizeLimitTest`) — reject saved state that's grown too large to persist.
-4. **`recreate`** (`RecreateTest`) — model which piece of state survives a config change versus a process death.
-5. **`recreateForCause`** (`RecreateForCauseTest`) — extend that model to a third cause, task removal, which loses both the ViewModel field and the saved-state field.
+1. **`saveState`** (`T1SaveStateTest`) — keep only the values that can actually go into saved state, drop the rest.
+2. **`restoreState`** (`T2RestoreStateTest`) — rebuild a screen's state from what was saved, falling back to defaults for anything missing.
+3. **`ensureWithinSizeLimit`** (`T3SizeLimitTest`) — reject saved state that's grown too large to persist.
+4. **`recreate`** (`T4RecreateTest`) — model which piece of state survives a config change versus a process death.
+5. **`recreateForCause`** (`T5RecreateForCauseTest`) — extend that model to a third cause, task removal, which loses both the ViewModel field and the saved-state field.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

@@ -30,7 +30,7 @@ data class DeviceConfig(
     val densityDpi: Int
 )
 
-// TODO(t1): ParseQualifiersTest
+// TODO(t1): T1ParseQualifiersTest
 // Parse a resource directory name into its typed Qualifiers. The name is a
 // base segment (e.g. "drawable" or "values") followed by zero or more
 // "-token" qualifier segments in any order. A token is "night", the lowercase
@@ -39,7 +39,7 @@ fun parseQualifiers(dirName: String): Qualifiers {
     TODO("t1: split dirName on '-', classify each qualifier token, and build a Qualifiers")
 }
 
-// TODO(t2): IsCompatibleTest
+// TODO(t2): T2IsCompatibleTest
 // Decide whether `qualifiers` could ever apply to `device`: a qualifier that
 // is set and differs from the device's value is a contradiction, but a
 // density qualifier is never a contradiction.
@@ -47,7 +47,7 @@ fun isCompatible(qualifiers: Qualifiers, device: DeviceConfig): Boolean {
     TODO("t2: return false only when a set locale/night qualifier contradicts the device")
 }
 
-// TODO(t3): BestMatchTest
+// TODO(t3): T3BestMatchTest
 // Given every candidate resource directory's Qualifiers and the requesting
 // device, return the single best match: drop contradictions, then narrow by
 // qualifier precedence (locale outranks night mode), the way Android's
@@ -56,7 +56,7 @@ fun bestMatch(candidates: List<Qualifiers>, device: DeviceConfig): Qualifiers? {
     TODO("t3: eliminate contradictions, then narrow by precedence: locale, then night")
 }
 
-// TODO(t4): ClosestDensityTest
+// TODO(t4): T4ClosestDensityTest
 // Density is never eliminated as a contradiction, so pick whichever available
 // bucket's dpi is numerically closest to the device's dpi. When two buckets
 // are equally close, prefer the higher-dpi one (matching Android's

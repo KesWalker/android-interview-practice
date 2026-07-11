@@ -18,24 +18,24 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :collections:test                          # run everything
-./gradlew :collections:test --tests "*CartViewTest"   # one task
+./gradlew :collections:test --tests "*T1CartViewTest"   # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/collections/Tasks.kt`.
 
-1. **`Cart.items`** (`CartViewTest`) — expose the cart's items without copying the
+1. **`Cart.items`** (`T1CartViewTest`) — expose the cart's items without copying the
    underlying list.
-2. **`totalValue`** (`TotalValueTest`) — sum every value in a list of numbers, as a
+2. **`totalValue`** (`T2TotalValueTest`) — sum every value in a list of numbers, as a
    `Double`.
-3. **`splitByLength`** (`SplitByLengthTest`) — split a list of words into two, by
+3. **`splitByLength`** (`T3SplitByLengthTest`) — split a list of words into two, by
    length, keeping order.
-4. **`firstSquareOver`** (`FirstSquareOverTest`) — return the first perfect square
+4. **`firstSquareOver`** (`T4FirstSquareOverTest`) — return the first perfect square
    past a threshold, without pre-computing every square up to it.
-5. **`packInto`** (`PackIntoTest`) — copy a fixed-size Array into a genuinely
+5. **`packInto`** (`T5PackIntoTest`) — copy a fixed-size Array into a genuinely
    growable list plus one more element.
-6. **`frozen`** (`FrozenListTest`) — build a genuinely immutable persistent list,
+6. **`frozen`** (`T6FrozenListTest`) — build a genuinely immutable persistent list,
    not just a read-only view over a mutable one.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

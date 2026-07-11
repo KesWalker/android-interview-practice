@@ -36,28 +36,28 @@ class LocalArticleStore {
     }
 }
 
-// TODO(t1): FetchArticleTest
+// TODO(t1): T1FetchArticleTest
 // Fetch the raw dto for `id` using `fetchDto`, then return only the fields
 // the app needs as an `Article`.
 suspend fun fetchArticle(id: String, fetchDto: suspend (String) -> ArticleDto): Article {
     TODO("t1: fetch the dto for id, then return just the fields the app needs")
 }
 
-// TODO(t2): RefreshArticlesTest
+// TODO(t2): T2RefreshArticlesTest
 // Fetch every dto with `fetchAll`, keep only the fields the app needs, store
 // that list in `local`, and also return it.
 suspend fun refreshArticles(fetchAll: suspend () -> List<ArticleDto>, local: LocalArticleStore): List<Article> {
     TODO("t2: fetch all dtos, trim them down, save them into local, and return them")
 }
 
-// TODO(t3): LoadOnDispatcherTest
+// TODO(t3): T3LoadOnDispatcherTest
 // Run `blockingWork` using `dispatcher` instead of whatever context called
 // this function, and return its result.
 suspend fun <T> loadOnDispatcher(dispatcher: CoroutineDispatcher, blockingWork: () -> T): T {
     TODO("t3: run blockingWork using dispatcher and return its result")
 }
 
-// TODO(t4): ArticleCacheTest
+// TODO(t4): T4ArticleCacheTest
 // A hit counter keyed by article id; many callers may record a hit for the
 // same id at the same time and no increment should ever be lost.
 class ArticleCache {

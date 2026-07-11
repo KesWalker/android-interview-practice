@@ -18,7 +18,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :properties:test                          # run everything
-./gradlew :properties:test --tests "*LazyConfigTest"    # one task
+./gradlew :properties:test --tests "*T1LazyConfigTest"    # one task
 ```
 
 ## The tasks
@@ -26,20 +26,20 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/properties/Tasks.kt`. Work out the idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`LazyConfig.value`** (`LazyConfigTest`) — computed from a loader, but only
+1. **`LazyConfig.value`** (`T1LazyConfigTest`) — computed from a loader, but only
    on first read, then reused.
-2. **`UserSession.greeting`** (`SessionGreetingTest`) — greet by name once
+2. **`UserSession.greeting`** (`T2SessionGreetingTest`) — greet by name once
    `username` has been assigned, otherwise greet a stranger.
-3. **`Profile.bio`** (`TrimmedBioTest`) — whatever's assigned should come back
+3. **`Profile.bio`** (`T3TrimmedBioTest`) — whatever's assigned should come back
    out with its whitespace trimmed.
-4. **`TodoList.items`** (`TodoListItemsTest`) — a read-only view of the list
+4. **`TodoList.items`** (`T4TodoListItemsTest`) — a read-only view of the list
    this class holds internally.
-5. **`configuredAttempts`** (`ConfiguredAttemptsTest`) — read a primitive
+5. **`configuredAttempts`** (`T5ConfiguredAttemptsTest`) — read a primitive
    `var` backed by `Delegates.notNull()`, the lateinit alternative for types
    that can't be null-sentinelled.
-6. **`Rectangle.area`** (`RectangleAreaTest`) — a computed getter with no
+6. **`Rectangle.area`** (`T6RectangleAreaTest`) — a computed getter with no
    backing field, always derived fresh from `width`/`height`.
-7. **`Account.deposit`/`withdraw`** (`AccountTest`) — mutate a `private set`
+7. **`Account.deposit`/`withdraw`** (`T7AccountTest`) — mutate a `private set`
    property only from inside its own class.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

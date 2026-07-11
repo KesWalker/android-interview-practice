@@ -19,7 +19,7 @@ next to a test class, or from a terminal:
 
 ```bash
 ./gradlew :concurrenthashmap:test                              # run everything
-./gradlew :concurrenthashmap:test --tests "*PutIfAbsentOnceTest"  # one task
+./gradlew :concurrenthashmap:test --tests "*T1PutIfAbsentOnceTest"  # one task
 ```
 
 ## The tasks
@@ -27,12 +27,12 @@ next to a test class, or from a terminal:
 All the work is in `src/main/kotlin/chm/Tasks.kt`. Work out the idiom yourself,
 or pair with the tutor and let it nudge you toward it.
 
-1. **`putIfAbsentOnce`** (`PutIfAbsentOnceTest`) - insert a value only if the key is absent, and report whether this call was the one that did it.
-2. **`incrementCount`** (`IncrementCountTest`) - bump a counter safely under concurrent callers.
-3. **`getOrCompute`** (`GetOrComputeTest`) - lazily fill a cache entry without ever computing it twice for the same key.
-4. **`bumpIfCurrent`** (`BumpIfCurrentTest`) - replace a value only if it still matches an expected value.
-5. **`InFlightRequests`** (`InFlightRequestsTest`) - track in-flight ids with `ConcurrentHashMap.newKeySet()`, so no id is ever counted twice.
-6. **`BoundedRegistry.register`** (`BoundedRegistryTest`) - accept registrations up to a fixed capacity, using an atomic counter instead of a racy `size()` check.
+1. **`putIfAbsentOnce`** (`T1PutIfAbsentOnceTest`) - insert a value only if the key is absent, and report whether this call was the one that did it.
+2. **`incrementCount`** (`T2IncrementCountTest`) - bump a counter safely under concurrent callers.
+3. **`getOrCompute`** (`T3GetOrComputeTest`) - lazily fill a cache entry without ever computing it twice for the same key.
+4. **`bumpIfCurrent`** (`T4BumpIfCurrentTest`) - replace a value only if it still matches an expected value.
+5. **`InFlightRequests`** (`T5InFlightRequestsTest`) - track in-flight ids with `ConcurrentHashMap.newKeySet()`, so no id is ever counted twice.
+6. **`BoundedRegistry.register`** (`T6BoundedRegistryTest`) - accept registrations up to a fixed capacity, using an atomic counter instead of a racy `size()` check.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

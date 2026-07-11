@@ -20,13 +20,13 @@ fun interface Producer<out T> {
     fun produce(): T
 }
 
-// TODO(t1): FilterByTypeTest
+// TODO(t1): T1FilterByTypeTest
 // Keep only the elements of `items` that are actually a T, in their original order.
 inline fun <reified T> filterByType(items: List<Any?>): List<T> {
     TODO("t1: keep only the elements of items that are a T")
 }
 
-// TODO(t2): WidenProducerTest
+// TODO(t2): T2WidenProducerTest
 // Return `dogs` but typed as something that produces Animal values instead of Dog values.
 fun widenToAnimalProducer(dogs: Producer<Dog>): Producer<Animal> {
     TODO("t2: return dogs, typed to produce Animal")
@@ -36,7 +36,7 @@ fun interface AnimalHandler<in T> {
     fun handle(item: T): String
 }
 
-// TODO(t3): NarrowHandlerTest
+// TODO(t3): T3NarrowHandlerTest
 // Return `handler` but typed as something that can handle Dog values instead of Animal values.
 fun narrowToDogHandler(handler: AnimalHandler<Animal>): AnimalHandler<Dog> {
     TODO("t3: return handler, typed to handle Dog")
@@ -44,7 +44,7 @@ fun narrowToDogHandler(handler: AnimalHandler<Animal>): AnimalHandler<Dog> {
 
 class NumberBox<out T : Number>(val value: T)
 
-// TODO(t4): SumBoxesTest
+// TODO(t4): T4SumBoxesTest
 // Return the sum, as a Double, of every box's value in `boxes`.
 fun sumBoxes(boxes: List<NumberBox<*>>): Double {
     TODO("t4: sum every box's value as a Double")

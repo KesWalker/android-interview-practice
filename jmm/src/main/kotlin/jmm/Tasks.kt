@@ -11,7 +11,7 @@ package jmm
  *     ./gradlew :jmm:test
  */
 
-// TODO(t1): SafeCounterTest
+// TODO(t1): T1SafeCounterTest
 // A counter that many threads can increment at the same time without losing updates.
 class SafeCounter {
     fun increment() {
@@ -23,7 +23,7 @@ class SafeCounter {
     }
 }
 
-// TODO(t2): HighWaterMarkTest
+// TODO(t2): T2HighWaterMarkTest
 // Remembers the highest value it has ever seen, even when many threads record at once.
 class HighWaterMark {
     fun record(value: Int) {
@@ -35,7 +35,7 @@ class HighWaterMark {
     }
 }
 
-// TODO(t3): LazyOnceTest
+// TODO(t3): T3LazyOnceTest
 // Computes its value on first use and reuses it afterwards, even if several
 // threads ask for it before it's ready.
 class LazyOnce<T>(private val compute: () -> T) {
@@ -44,7 +44,7 @@ class LazyOnce<T>(private val compute: () -> T) {
     }
 }
 
-// TODO(t4): RunOnBackgroundThreadTest
+// TODO(t4): T4RunOnBackgroundThreadTest
 // Runs `work` on its own thread and hands the result back to the caller.
 fun <T> runOnBackgroundThread(work: () -> T): T {
     TODO("t4: run work on its own thread, wait for it to finish, and return its result")

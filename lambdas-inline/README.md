@@ -16,7 +16,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :lambdas-inline:test                             # run everything
-./gradlew :lambdas-inline:test --tests "*CounterTest"       # one task
+./gradlew :lambdas-inline:test --tests "*T2CounterTest"       # one task
 ```
 
 ## The tasks
@@ -24,12 +24,12 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/lambdas/Tasks.kt`. Work out the idiom yourself,
 or pair with the tutor and let it nudge you toward it.
 
-1. **`sumOfPositives`** (`SumOfPositivesTest`) — add up only the positive numbers in a list.
-2. **`makeCounter`** (`CounterTest`) — return a callable that tracks its own call count.
-3. **`indexOfFirstNegative`** (`IndexOfFirstNegativeTest`) — find the index of the first negative number, or -1.
-4. **`filterIsInstance2`** (`FilterIsInstanceTest`) — keep only the elements of a mixed list that match a given type.
-5. **`timedRun`** (`TimedRunTest`) — run a `crossinline` action wrapped inside a `Runnable`, logging before and after.
-6. **`registerHandlers`** (`RegisterHandlersTest`) — call one lambda immediately and stash a `noinline` one for later.
+1. **`sumOfPositives`** (`T1SumOfPositivesTest`) — add up only the positive numbers in a list.
+2. **`makeCounter`** (`T2CounterTest`) — return a callable that tracks its own call count.
+3. **`indexOfFirstNegative`** (`T3IndexOfFirstNegativeTest`) — find the index of the first negative number, or -1.
+4. **`filterIsInstance2`** (`T4FilterIsInstanceTest`) — keep only the elements of a mixed list that match a given type.
+5. **`timedRun`** (`T5TimedRunTest`) — run a `crossinline` action wrapped inside a `Runnable`, logging before and after.
+6. **`registerHandlers`** (`T6RegisterHandlersTest`) — call one lambda immediately and stash a `noinline` one for later.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

@@ -17,7 +17,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :repository:test                          # run everything
-./gradlew :repository:test --tests "*FetchArticleTest"   # one task
+./gradlew :repository:test --tests "*T1FetchArticleTest"   # one task
 ```
 
 ## The tasks
@@ -25,12 +25,12 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/repository/Tasks.kt`. Work out the idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`fetchArticle`** (`FetchArticleTest`) — fetch a DTO and return just the fields the app needs, as a domain model.
-2. **`refreshArticles`** (`RefreshArticlesTest`) — fetch, trim, and save into the local store, which is the single source of truth.
-3. **`loadOnDispatcher`** (`LoadOnDispatcherTest`) — run blocking work on an injected dispatcher instead of the caller's context.
-4. **`ArticleCache`** (`ArticleCacheTest`) — record hits on a shared cache without losing updates under concurrent access.
-5. **`observeArticlesByQuery`** (`ObserveArticlesByQueryTest`) — expose an ongoingly-updating filtered Flow instead of a one-shot suspend function.
-6. **`logEvent`** (`LogEventTest`) — launch app-scoped work that survives the caller's own scope being cancelled.
+1. **`fetchArticle`** (`T1FetchArticleTest`) — fetch a DTO and return just the fields the app needs, as a domain model.
+2. **`refreshArticles`** (`T2RefreshArticlesTest`) — fetch, trim, and save into the local store, which is the single source of truth.
+3. **`loadOnDispatcher`** (`T3LoadOnDispatcherTest`) — run blocking work on an injected dispatcher instead of the caller's context.
+4. **`ArticleCache`** (`T4ArticleCacheTest`) — record hits on a shared cache without losing updates under concurrent access.
+5. **`observeArticlesByQuery`** (`T5ObserveArticlesByQueryTest`) — expose an ongoingly-updating filtered Flow instead of a one-shot suspend function.
+6. **`logEvent`** (`T6LogEventTest`) — launch app-scoped work that survives the caller's own scope being cancelled.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

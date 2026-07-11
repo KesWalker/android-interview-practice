@@ -19,7 +19,7 @@ data class Employee(val id: String) {
     var department: String = ""
 }
 
-// TODO(t1): EmployeeEqualityTest
+// TODO(t1): T1EmployeeEqualityTest
 // Return whether `a` and `b` should be treated as the same employee record.
 fun sameEmployee(a: Employee, b: Employee): Boolean {
     TODO("t1: decide equality for two Employee records")
@@ -28,7 +28,7 @@ fun sameEmployee(a: Employee, b: Employee): Boolean {
 // A point on a 2D grid.
 data class Point(val x: Int, val y: Int)
 
-// TODO(t2): MovedPointTest
+// TODO(t2): T2MovedPointTest
 // Return a new Point shifted by dx/dy, leaving `point` itself untouched.
 fun moved(point: Point, dx: Int, dy: Int): Point {
     TODO("t2: produce a Point shifted by dx/dy")
@@ -40,7 +40,7 @@ data class Placed(val orderId: String) : DeliveryStatus
 data class Shipped(val trackingCode: String) : DeliveryStatus
 data class Delivered(val signedBy: String) : DeliveryStatus
 
-// TODO(t3): DeliveryStatusMessageTest
+// TODO(t3): T3DeliveryStatusMessageTest
 // Return a customer-facing message for every possible DeliveryStatus:
 // Placed("A1") -> "Order A1 has been placed."
 // Shipped("TRK9") -> "Your order is on the way (tracking: TRK9)."
@@ -53,7 +53,7 @@ fun statusMessage(status: DeliveryStatus): String {
 @JvmInline
 value class Meters(val value: Double)
 
-// TODO(t4): DoubleDistanceTest
+// TODO(t4): T4DoubleDistanceTest
 // Return a new Meters distance that's twice the given one.
 fun doubled(distance: Meters): Meters {
     TODO("t4: return a Meters distance twice as large as `distance`")

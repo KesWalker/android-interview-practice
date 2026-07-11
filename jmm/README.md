@@ -19,7 +19,7 @@ next to a test class, or from a terminal:
 
 ```bash
 ./gradlew :jmm:test                                # run everything
-./gradlew :jmm:test --tests "*SafeCounterTest"      # one task
+./gradlew :jmm:test --tests "*T1SafeCounterTest"      # one task
 ```
 
 ## The tasks
@@ -27,10 +27,10 @@ next to a test class, or from a terminal:
 All the work is in `src/main/kotlin/jmm/Tasks.kt`. Work out the idiom yourself,
 or pair with the tutor and let it nudge you toward it.
 
-1. **`SafeCounter`** (`SafeCounterTest`) — a counter many threads can increment at once without losing updates.
-2. **`HighWaterMark`** (`HighWaterMarkTest`) — remembers the highest value seen, even when many threads race to record.
-3. **`LazyOnce`** (`LazyOnceTest`) — computes its value once and reuses it, even if several threads ask before it's ready.
-4. **`runOnBackgroundThread`** (`RunOnBackgroundThreadTest`) — runs work on its own thread and hands the result back safely.
+1. **`SafeCounter`** (`T1SafeCounterTest`) — a counter many threads can increment at once without losing updates.
+2. **`HighWaterMark`** (`T2HighWaterMarkTest`) — remembers the highest value seen, even when many threads race to record.
+3. **`LazyOnce`** (`T3LazyOnceTest`) — computes its value once and reuses it, even if several threads ask before it's ready.
+4. **`runOnBackgroundThread`** (`T4RunOnBackgroundThreadTest`) — runs work on its own thread and hands the result back safely.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

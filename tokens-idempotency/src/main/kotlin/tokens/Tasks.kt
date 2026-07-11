@@ -13,7 +13,7 @@ import kotlinx.coroutines.CoroutineScope
  *     ./gradlew :tokens-idempotency:test
  */
 
-// TODO(t1): IdempotencyStoreTest
+// TODO(t1): T1IdempotencyStoreTest
 // Run `operation` only the first time a given key is seen; a repeat call with
 // the same key returns the stored result without running it again.
 class IdempotencyStore<T> {
@@ -22,7 +22,7 @@ class IdempotencyStore<T> {
     }
 }
 
-// TODO(t2): SingleFlightTokenManagerTest
+// TODO(t2): T2SingleFlightTokenManagerTest
 // Serve a cached token; when none is cached, only one concurrent caller should
 // actually run `refresh`, and every other caller should get its result.
 class SingleFlightTokenManager(private val refresh: suspend () -> String) {
@@ -31,7 +31,7 @@ class SingleFlightTokenManager(private val refresh: suspend () -> String) {
     }
 }
 
-// TODO(t3): SharedRefreshTokenManagerTest
+// TODO(t3): T3SharedRefreshTokenManagerTest
 // Share one in-flight refresh across every waiting caller, run under `scope`
 // (not the caller's own job) so cancelling one caller can't cancel the rest.
 class SharedRefreshTokenManager(
@@ -43,7 +43,7 @@ class SharedRefreshTokenManager(
     }
 }
 
-// TODO(t4): ExpiringTokenCacheTest
+// TODO(t4): T4ExpiringTokenCacheTest
 // Cache a Token until it expires; a failed refresh must propagate and must
 // leave the previously cached token untouched (swap only on success).
 data class Token(val value: String, val expiresAtEpochMillis: Long)

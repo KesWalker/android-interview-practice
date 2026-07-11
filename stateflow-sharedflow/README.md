@@ -20,7 +20,7 @@ next to a test class, or from a terminal:
 
 ```bash
 ./gradlew :stateflow-sharedflow:test                          # run everything
-./gradlew :stateflow-sharedflow:test --tests "*CounterTest"    # one task
+./gradlew :stateflow-sharedflow:test --tests "*T1CounterTest"    # one task
 ```
 
 ## The tasks
@@ -28,19 +28,19 @@ next to a test class, or from a terminal:
 All the work is in `src/main/kotlin/stateflow/Tasks.kt`. Work out the idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`Counter.increment`** (`CounterTest`) — bump a `StateFlow`-backed count by
+1. **`Counter.increment`** (`T1CounterTest`) — bump a `StateFlow`-backed count by
    one, safely even when many callers do it at once.
-2. **`LoginController.login`** (`LoginControllerTest`) — report an in-progress
+2. **`LoginController.login`** (`T2LoginControllerTest`) — report an in-progress
    check as ongoing state, and a blank-password failure as a one-off event.
-3. **`NotificationCenter`** (`NotificationCenterTest`) — keep the last two
+3. **`NotificationCenter`** (`T3NotificationCenterTest`) — keep the last two
    messages for late subscribers, and never make a publisher wait.
-4. **`toHotStateFlow`** (`ToHotStateFlowTest`) — share one upstream flow across
+4. **`toHotStateFlow`** (`T4ToHotStateFlowTest`) — share one upstream flow across
    every collector, starting only once something is actually collecting.
-5. **`BoundedEventBus.publish`** (`BoundedEventBusTest`) — publish onto a
+5. **`BoundedEventBus.publish`** (`T5BoundedEventBusTest`) — publish onto a
    default SharedFlow, suspending the caller until a collector is ready.
-6. **`LifecycleAwareCollector.onStateChanged`** (`LifecycleAwareCollectorTest`)
+6. **`LifecycleAwareCollector.onStateChanged`** (`T6LifecycleAwareCollectorTest`)
    — start a fresh collection on STARTED, and fully cancel it below STARTED.
-7. **`toSharedEvents`** (`ToSharedEventsTest`) — shareIn one upstream flow as
+7. **`toSharedEvents`** (`T7ToSharedEventsTest`) — shareIn one upstream flow as
    a no-replay SharedFlow of one-off events, only running while collected.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

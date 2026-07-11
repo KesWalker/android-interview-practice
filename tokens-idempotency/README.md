@@ -17,31 +17,31 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :tokens-idempotency:test                              # run everything
-./gradlew :tokens-idempotency:test --tests "*IdempotencyStoreTest"   # one task
+./gradlew :tokens-idempotency:test --tests "*T1IdempotencyStoreTest"   # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/tokens/Tasks.kt`.
 
-1. **`IdempotencyStore`** (`IdempotencyStoreTest`) — run an operation once per key; a
+1. **`IdempotencyStore`** (`T1IdempotencyStoreTest`) — run an operation once per key; a
    repeat call with the same key returns the stored result instead of re-running it.
-2. **`SingleFlightTokenManager`** (`SingleFlightTokenManagerTest`) — serve a cached
+2. **`SingleFlightTokenManager`** (`T2SingleFlightTokenManagerTest`) — serve a cached
    token, and when it's missing, make sure many concurrent callers still trigger
    only one refresh.
-3. **`SharedRefreshTokenManager`** (`SharedRefreshTokenManagerTest`) — share one
+3. **`SharedRefreshTokenManager`** (`T3SharedRefreshTokenManagerTest`) — share one
    in-flight refresh across every waiting caller so that cancelling one caller can't
    take the refresh down with it.
-4. **`ExpiringTokenCache`** (`ExpiringTokenCacheTest`) — cache a token until it
+4. **`ExpiringTokenCache`** (`T4ExpiringTokenCacheTest`) — cache a token until it
    expires, and make sure a failed refresh propagates without corrupting what was
    cached before.
-5. **`RotatingRefreshTokenStore`** (`RotatingRefreshTokenStoreTest`) — rotate the
+5. **`RotatingRefreshTokenStore`** (`T5RotatingRefreshTokenStoreTest`) — rotate the
    refresh token on every successful refresh, and revoke the whole token family
    if a stale, already-rotated token is ever replayed.
-6. **`attemptRefresh`** (`AttemptRefreshTest`) — treat a 401 on the refresh call
+6. **`attemptRefresh`** (`T6AttemptRefreshTest`) — treat a 401 on the refresh call
    itself as a clean session expiry instead of retrying, while letting any other
    failure propagate.
-7. **`redactForLogging`** (`RedactForLoggingTest`) — mask the Authorization
+7. **`redactForLogging`** (`T7RedactForLoggingTest`) — mask the Authorization
    header's value before request/response data ever reaches a debug log line.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

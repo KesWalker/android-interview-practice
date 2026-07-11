@@ -26,20 +26,20 @@ data class JobResult(
 class WorkQueue {
     private val pending = mutableListOf<Job>()
 
-    // TODO(t1): EnqueueOrderTest
+    // TODO(t1): T1EnqueueOrderTest
     // Add a job to the back of the queue.
     fun enqueue(job: Job) {
         TODO("t1: append job to the queue")
     }
 
-    // TODO(t1): EnqueueOrderTest
+    // TODO(t1): T1EnqueueOrderTest
     // Return the ids of the jobs still waiting to run, in the order they'll run.
     fun pendingIds(): List<String> {
         TODO("t1: ids of the still-pending jobs, in run order")
     }
 
-    // TODO(t2): RetryUntilSuccessTest
-    // TODO(t3): GiveUpAfterMaxAttemptsTest
+    // TODO(t2): T2RetryUntilSuccessTest
+    // TODO(t3): T3GiveUpAfterMaxAttemptsTest
     // Remove the next queued job and run its action, retrying on failure up to
     // its maxAttempts, then report how many attempts it took and whether it
     // ultimately succeeded. Return null when the queue is empty.
@@ -48,7 +48,7 @@ class WorkQueue {
     }
 }
 
-// TODO(t4): BackoffDelayTest
+// TODO(t4): T4BackoffDelayTest
 // Delay to wait before the given retry attempt (1-based), growing with each attempt.
 fun backoffMillis(attempt: Int, baseMillis: Long): Long {
     TODO("t4: delay before retry `attempt`, based on baseMillis")

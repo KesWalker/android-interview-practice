@@ -16,7 +16,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :deep-link-routing:test                        # run everything
-./gradlew :deep-link-routing:test --tests "*ParseUriTest"      # one task
+./gradlew :deep-link-routing:test --tests "*T1ParseUriTest"      # one task
 ```
 
 ## The tasks
@@ -26,15 +26,15 @@ All the work is in `src/main/kotlin/deeplink/Tasks.kt`. The supporting types
 filling in the functions. The tasks build on each other, so solving them in order
 (1 → 2 → 3 → 4 → 5) is the smoothest path.
 
-1. **`parseUri`** (`ParseUriTest`) — split a raw URI string into scheme, host, path
+1. **`parseUri`** (`T1ParseUriTest`) — split a raw URI string into scheme, host, path
    segments, and query params.
-2. **`matchPath`** (`MatchPathTest`) — match path segments against a template like
+2. **`matchPath`** (`T2MatchPathTest`) — match path segments against a template like
    `tour/{id}`, capturing placeholder values.
-3. **`route`** (`RouteDestinationTest`) — turn a parsed URI into a typed
+3. **`route`** (`T3RouteDestinationTest`) — turn a parsed URI into a typed
    `Destination`, falling back to `Unknown` when nothing matches.
-4. **`classifyLink`** (`ClassifyLinkTest`) — tell a verified app link apart from an
+4. **`classifyLink`** (`T4ClassifyLinkTest`) — tell a verified app link apart from an
    unverified web link and a custom-scheme deep link.
-5. **`matchesFilter`** (`MatchesFilterTest`) — decide whether an implicit intent
+5. **`matchesFilter`** (`T5MatchesFilterTest`) — decide whether an implicit intent
    matches a declared `<intent-filter>`'s action and category lists, including the
    classic forgot-`CATEGORY_DEFAULT` gotcha.
 

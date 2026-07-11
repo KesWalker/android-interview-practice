@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.asStateFlow
  *     ./gradlew :stateflow-sharedflow:test
  */
 
-// TODO(t1): CounterTest
+// TODO(t1): T1CounterTest
 class Counter {
     private val _count = MutableStateFlow(0)
     val count: StateFlow<Int> = _count.asStateFlow()
@@ -35,7 +35,7 @@ sealed interface LoginEvent {
     data class ShowError(val message: String) : LoginEvent
 }
 
-// TODO(t2): LoginControllerTest
+// TODO(t2): T2LoginControllerTest
 class LoginController {
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -50,7 +50,7 @@ class LoginController {
     }
 }
 
-// TODO(t3): NotificationCenterTest
+// TODO(t3): T3NotificationCenterTest
 class NotificationCenter {
     // Keep the 2 most-recent messages available for late subscribers, and
     // never make a publisher wait for room in the buffer.
@@ -65,7 +65,7 @@ class NotificationCenter {
     }
 }
 
-// TODO(t4): ToHotStateFlowTest
+// TODO(t4): T4ToHotStateFlowTest
 // Share `source` as a single running flow across every collector, seeded with
 // `initial`, that only runs while at least one collector is present.
 fun <T> toHotStateFlow(scope: CoroutineScope, source: Flow<T>, initial: T): StateFlow<T> {

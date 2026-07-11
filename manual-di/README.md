@@ -17,25 +17,25 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :manual-di:test                              # run everything
-./gradlew :manual-di:test --tests "*ManualWiringTest"   # one task
+./gradlew :manual-di:test --tests "*T1ManualWiringTest"   # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/di/Tasks.kt`.
 
-1. **`buildUserService`** (`ManualWiringTest`) — wire `Logger`, `UserRepository`, and
+1. **`buildUserService`** (`T1ManualWiringTest`) — wire `Logger`, `UserRepository`, and
    `UserService` together by hand, constructor injection all the way, without
    duplicating any dependency.
-2. **`SingletonProvider`** (`SingletonScopeTest`) — a provider that hands back the
+2. **`SingletonProvider`** (`T2SingletonScopeTest`) — a provider that hands back the
    same instance on every call.
-3. **`FactoryProvider`** (`FactoryScopeTest`) — a provider that hands back a new
+3. **`FactoryProvider`** (`T3FactoryScopeTest`) — a provider that hands back a new
    instance on every call.
-4. **`Container`** (`ContainerResolutionTest`) — resolve a registered binding by key,
+4. **`Container`** (`T4ContainerResolutionTest`) — resolve a registered binding by key,
    and fail with a clear error when a binding is missing.
-5. **`FlowScope`** (`FlowScopeTest`) — a subcomponent-style scope whose cached instances
+5. **`FlowScope`** (`T5FlowScopeTest`) — a subcomponent-style scope whose cached instances
    are all released together.
-6. **`UserSessionFactory`** (`UserSessionFactoryTest`) — combine a graph-provided
+6. **`UserSessionFactory`** (`T6UserSessionFactoryTest`) — combine a graph-provided
    dependency with a call-time parameter, the manual analogue of `@AssistedInject`.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

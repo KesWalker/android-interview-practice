@@ -17,7 +17,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :delegation:test                          # run everything
-./gradlew :delegation:test --tests "*LoudNotifierTest"   # one task
+./gradlew :delegation:test --tests "*T1LoudNotifierTest"   # one task
 ```
 
 ## The tasks
@@ -25,20 +25,20 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/delegation/Tasks.kt`. Work out the idiom
 yourself, or pair with the tutor and let it nudge you toward it.
 
-1. **`loudNotifier`** (`LoudNotifierTest`) — a `Notifier` that forwards every
+1. **`loudNotifier`** (`T1LoudNotifierTest`) — a `Notifier` that forwards every
    member to another `Notifier`, except one method it changes.
-2. **`nonNegative`** (`MeterTest`) — a property delegate whose writes are
+2. **`nonNegative`** (`T2MeterTest`) — a property delegate whose writes are
    clamped so the stored value never goes below zero.
-3. **`cachedConfig`** (`ConfigCacheTest`) — a value that's computed once, on
+3. **`cachedConfig`** (`T3ConfigCacheTest`) — a value that's computed once, on
    first read, then reused on every later read.
-4. **`onlyIncreasing`** (`GameTest`) — a property delegate that silently
+4. **`onlyIncreasing`** (`T4GameTest`) — a property delegate that silently
    rejects any write that isn't an improvement on the current value.
-5. **`withDisplayLabel`** (`WithDisplayLabelTest`) — the classic delegate
+5. **`withDisplayLabel`** (`T5WithDisplayLabelTest`) — the classic delegate
    gotcha: a `by`-delegated interface's own methods can't see overrides made
    on the deriving class.
-6. **`auditedSetting`** (`AuditedSettingTest`) — the standard `Delegates.observable`
+6. **`auditedSetting`** (`T6AuditedSettingTest`) — the standard `Delegates.observable`
    delegate, which notifies after every write but can never reject one.
-7. **`selfNamingProperty`** (`SelfNamingPropertyTest`) — a custom delegate that
+7. **`selfNamingProperty`** (`T7SelfNamingPropertyTest`) — a custom delegate that
    implements `provideDelegate` to capture the property's own declared name
    once, at bind time.
 

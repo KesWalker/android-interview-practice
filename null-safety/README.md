@@ -15,7 +15,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :null-safety:test                       # run everything
-./gradlew :null-safety:test --tests "*SafeLengthTest"   # one task
+./gradlew :null-safety:test --tests "*T1SafeLengthTest"   # one task
 ```
 
 ## The tasks
@@ -24,13 +24,13 @@ All the work is in `src/main/kotlin/nullsafety/Tasks.kt`. No `!!` allowed — ea
 has an idiomatic one-liner. Work out the idiom yourself, or pair with the tutor and
 let it nudge you toward it.
 
-1. **`safeLength`** (`SafeLengthTest`) — length of a nullable string, or 0.
-2. **`greetingFor`** (`GreetingTest`) — greet by name, fall back when null or blank.
-3. **`validAges`** (`ValidAgesTest`) — keep only the strings that parse as `Int`.
-4. **`shout`** (`ShoutTest`) — uppercase only when it's a `String`, else null.
-5. **`tokenStatus`** (`TokenStatusTest`) — describe a mutable `SessionCache.token`, or "No token set".
-6. **`discountPercent`** (`DiscountPercentTest`) — parse a discount code's percent, or null when it doesn't fit.
-7. **`validatedConfig`** (`ValidatedConfigTest`) — return config unchanged, or throw when it's null.
+1. **`safeLength`** (`T1SafeLengthTest`) — length of a nullable string, or 0.
+2. **`greetingFor`** (`T2GreetingTest`) — greet by name, fall back when null or blank.
+3. **`validAges`** (`T3ValidAgesTest`) — keep only the strings that parse as `Int`.
+4. **`shout`** (`T4ShoutTest`) — uppercase only when it's a `String`, else null.
+5. **`tokenStatus`** (`T5TokenStatusTest`) — describe a mutable `SessionCache.token`, or "No token set".
+6. **`discountPercent`** (`T6DiscountPercentTest`) — parse a discount code's percent, or null when it doesn't fit.
+7. **`validatedConfig`** (`T7ValidatedConfigTest`) — return config unchanged, or throw when it's null.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

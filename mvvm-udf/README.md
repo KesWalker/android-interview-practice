@@ -18,7 +18,7 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :mvvm-udf:test                            # run everything
-./gradlew :mvvm-udf:test --tests "*ScreenStatusTest"    # one task
+./gradlew :mvvm-udf:test --tests "*T1ScreenStatusTest"    # one task
 ```
 
 ## The tasks
@@ -26,17 +26,17 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/mvvm/Tasks.kt`. Work out the idiom yourself, or
 pair with the tutor and let it nudge you toward it.
 
-1. **`screenStatus`** (`ScreenStatusTest`) — collapse a screen's loading/error/items
+1. **`screenStatus`** (`T1ScreenStatusTest`) — collapse a screen's loading/error/items
    fields into the one status it actually represents.
-2. **`cartUiState`** (`CartUiStateTest`) — turn already-correct business logic into a
+2. **`cartUiState`** (`T2CartUiStateTest`) — turn already-correct business logic into a
    display-ready screen state.
-3. **`FavoritesViewModel.toggleFavorite`** (`FavoritesViewModelTest`) — the only way
+3. **`FavoritesViewModel.toggleFavorite`** (`T3FavoritesViewModelTest`) — the only way
    the state it exposes is ever allowed to change, safe under concurrent callers.
-4. **`searchUiState`** (`SearchUiStateTest`) — one screen state, recomputed whenever
+4. **`searchUiState`** (`T4SearchUiStateTest`) — one screen state, recomputed whenever
    any of its inputs change.
-5. **`newsUiState`** (`NewsUiStateTest`) — turn a cold Flow into a hot StateFlow that
+5. **`newsUiState`** (`T5NewsUiStateTest`) — turn a cold Flow into a hot StateFlow that
    outlives rotation but not backgrounding.
-6. **`ItemListHolder`** (`ItemListHolderTest`) — model a one-off navigation event as
+6. **`ItemListHolder`** (`T6ItemListHolderTest`) — model a one-off navigation event as
    consume-once state.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you

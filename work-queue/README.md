@@ -17,31 +17,31 @@ next to a test class, or from a terminal:
 
 ```bash
 ./gradlew :work-queue:test                          # run everything
-./gradlew :work-queue:test --tests "*BackoffDelayTest"   # one task
+./gradlew :work-queue:test --tests "*T4BackoffDelayTest"   # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/work/Tasks.kt`.
 
-1. **`enqueue` / `pendingIds`** (`EnqueueOrderTest`) — jobs wait in the order
+1. **`enqueue` / `pendingIds`** (`T1EnqueueOrderTest`) — jobs wait in the order
    they were added, and running one takes it off the front.
-2. **`runNext`** (`RetryUntilSuccessTest`) — retry a failing job's action until
+2. **`runNext`** (`T2RetryUntilSuccessTest`) — retry a failing job's action until
    it succeeds, and report how many attempts it took.
-3. **`runNext`** (`GiveUpAfterMaxAttemptsTest`) — stop retrying once
+3. **`runNext`** (`T3GiveUpAfterMaxAttemptsTest`) — stop retrying once
    `maxAttempts` is reached and report the failure instead of looping forever.
-4. **`backoffMillis`** (`BackoffDelayTest`) — the delay before a given retry
+4. **`backoffMillis`** (`T4BackoffDelayTest`) — the delay before a given retry
    attempt, growing as attempts climb.
-5. **`restartBehavior`** (`RestartBehaviorTest`) — what a killed started
+5. **`restartBehavior`** (`T5RestartBehaviorTest`) — what a killed started
    service does on restart, given its `onStartCommand` return flag
    (`START_STICKY` / `START_NOT_STICKY` / `START_REDELIVER_INTENT`).
-6. **`canStartForegroundService`** (`CanStartForegroundServiceTest`) — whether
+6. **`canStartForegroundService`** (`T6CanStartForegroundServiceTest`) — whether
    the app is currently allowed to call `startForegroundService()`, given
    Android 12's background-start restriction.
-7. **`constraintsSatisfied`** (`ConstraintsSatisfiedTest`) — whether a
+7. **`constraintsSatisfied`** (`T7ConstraintsSatisfiedTest`) — whether a
    WorkManager job's declared constraints (network, charging, battery) are
    met by the device's current conditions.
-8. **`chooseScheduler`** (`ChooseSchedulerTest`) — pick AlarmManager,
+8. **`chooseScheduler`** (`T8ChooseSchedulerTest`) — pick AlarmManager,
    WorkManager, or a plain coroutine for a job based on its timing and
    durability needs.
 

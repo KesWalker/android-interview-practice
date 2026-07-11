@@ -13,27 +13,27 @@ package nullsafety
  * Rules of the game: no `!!`. Every task has an idiomatic one-liner solution.
  */
 
-// TODO(t1): SafeLengthTest
+// TODO(t1): T1SafeLengthTest
 // Return the length of `text`, or 0 when it is null.
 fun safeLength(text: String?): Int {
     TODO("t1: return text's length, or 0 if it is null (no !!)")
 }
 
-// TODO(t2): GreetingTest
+// TODO(t2): T2GreetingTest
 // Return "Hello, <name>!" but fall back to "Hello, there!" when `name` is null
 // or blank.
 fun greetingFor(name: String?): String {
     TODO("t2: greet by name, or 'Hello, there!' when null/blank")
 }
 
-// TODO(t3): ValidAgesTest
+// TODO(t3): T3ValidAgesTest
 // Turn a list of raw strings into the ages that actually parse as Int, dropping
 // anything that doesn't. Input like ["21", "x", "34", ""] -> [21, 34].
 fun validAges(raw: List<String>): List<Int> {
     TODO("t3: keep only the entries that parse as Int")
 }
 
-// TODO(t4): ShoutTest
+// TODO(t4): T4ShoutTest
 // If `value` is a String, return it uppercased; for anything else (including
 // null) return null. Do it without `is`/`if` casting.
 fun shout(value: Any?): String? {

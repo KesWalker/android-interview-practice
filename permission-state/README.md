@@ -16,20 +16,20 @@ to a test class, or from a terminal:
 
 ```bash
 ./gradlew :permission-state:test                          # run everything
-./gradlew :permission-state:test --tests "*NextStateTest"  # one task
+./gradlew :permission-state:test --tests "*T1NextStateTest"  # one task
 ```
 
 ## The tasks
 
 All the work is in `src/main/kotlin/permissions/Tasks.kt`.
 
-1. **`nextState`** (`NextStateTest`) — the state that follows a request result.
-2. **`shouldShowRationale`** (`ShouldShowRationaleTest`) — whether to explain before re-asking.
-3. **`actionFor`** (`ActionForTest`) — what the UI should do next for a given state.
-4. **`finalState`** (`FinalStateTest`) — where a permission ends up after a sequence of results.
-5. **`locationAccess`** (`LocationAccessTest`) — the precision (fine/coarse/denied) actually granted from a foreground-location request result.
-6. **`canRequestBackgroundLocation`** (`CanRequestBackgroundLocationTest`) — whether background location can be requested yet, given the foreground state.
-7. **`afterBackgrounding`** (`AfterBackgroundingTest`) — what a location grant mode becomes after the app spends time in the background.
+1. **`nextState`** (`T1NextStateTest`) — the state that follows a request result.
+2. **`shouldShowRationale`** (`T2ShouldShowRationaleTest`) — whether to explain before re-asking.
+3. **`actionFor`** (`T3ActionForTest`) — what the UI should do next for a given state.
+4. **`finalState`** (`T4FinalStateTest`) — where a permission ends up after a sequence of results.
+5. **`locationAccess`** (`T5LocationAccessTest`) — the precision (fine/coarse/denied) actually granted from a foreground-location request result.
+6. **`canRequestBackgroundLocation`** (`T6CanRequestBackgroundLocationTest`) — whether background location can be requested yet, given the foreground state.
+7. **`afterBackgrounding`** (`T7AfterBackgroundingTest`) — what a location grant mode becomes after the app spends time in the background.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.
