@@ -34,6 +34,10 @@ pair with the tutor and let it nudge you toward it.
    the state it exposes is ever allowed to change, safe under concurrent callers.
 4. **`searchUiState`** (`SearchUiStateTest`) — one screen state, recomputed whenever
    any of its inputs change.
+5. **`newsUiState`** (`NewsUiStateTest`) — turn a cold Flow into a hot StateFlow that
+   outlives rotation but not backgrounding.
+6. **`ItemListHolder`** (`ItemListHolderTest`) — model a one-off navigation event as
+   consume-once state.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

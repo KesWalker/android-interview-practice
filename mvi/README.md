@@ -29,6 +29,10 @@ All the work is in `src/main/kotlin/mvi/Tasks.kt`.
    then fold its outcome back in as a new intent.
 4. **`CartEffects.addToCart`** (`CartEffectsTest`) — announce a one-off effect
    through a dedicated channel instead of state.
+5. **`reduceForm`** (`ReduceFormTest`) — a reducer that stays pure by taking its
+   timestamp from the intent instead of the wall clock.
+6. **`loadProfile`** (`ProfileStoreTest`) — fold two independent async results into
+   one state via a single intent.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk
 you through each one and tick them off as your tests go green.

@@ -28,6 +28,9 @@ let it nudge you toward it.
 2. **`greetingFor`** (`GreetingTest`) — greet by name, fall back when null or blank.
 3. **`validAges`** (`ValidAgesTest`) — keep only the strings that parse as `Int`.
 4. **`shout`** (`ShoutTest`) — uppercase only when it's a `String`, else null.
+5. **`tokenStatus`** (`TokenStatusTest`) — describe a mutable `SessionCache.token`, or "No token set".
+6. **`discountPercent`** (`DiscountPercentTest`) — parse a discount code's percent, or null when it doesn't fit.
+7. **`validatedConfig`** (`ValidatedConfigTest`) — return config unchanged, or throw when it's null.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

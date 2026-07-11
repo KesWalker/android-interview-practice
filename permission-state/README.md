@@ -27,6 +27,9 @@ All the work is in `src/main/kotlin/permissions/Tasks.kt`.
 2. **`shouldShowRationale`** (`ShouldShowRationaleTest`) — whether to explain before re-asking.
 3. **`actionFor`** (`ActionForTest`) — what the UI should do next for a given state.
 4. **`finalState`** (`FinalStateTest`) — where a permission ends up after a sequence of results.
+5. **`locationAccess`** (`LocationAccessTest`) — the precision (fine/coarse/denied) actually granted from a foreground-location request result.
+6. **`canRequestBackgroundLocation`** (`CanRequestBackgroundLocationTest`) — whether background location can be requested yet, given the foreground state.
+7. **`afterBackgrounding`** (`AfterBackgroundingTest`) — what a location grant mode becomes after the app spends time in the background.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

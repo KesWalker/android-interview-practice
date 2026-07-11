@@ -33,6 +33,14 @@ yourself, or pair with the tutor and let it nudge you toward it.
    first read, then reused on every later read.
 4. **`onlyIncreasing`** (`GameTest`) — a property delegate that silently
    rejects any write that isn't an improvement on the current value.
+5. **`withDisplayLabel`** (`WithDisplayLabelTest`) — the classic delegate
+   gotcha: a `by`-delegated interface's own methods can't see overrides made
+   on the deriving class.
+6. **`auditedSetting`** (`AuditedSettingTest`) — the standard `Delegates.observable`
+   delegate, which notifies after every write but can never reject one.
+7. **`selfNamingProperty`** (`SelfNamingPropertyTest`) — a custom delegate that
+   implements `provideDelegate` to capture the property's own declared name
+   once, at bind time.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

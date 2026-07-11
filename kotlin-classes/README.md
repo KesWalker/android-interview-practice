@@ -27,6 +27,9 @@ out the idiom yourself, or pair with the tutor and let it nudge you toward it.
 2. **`moved`** (`MovedPointTest`) - produce a shifted copy of a point without touching the original.
 3. **`statusMessage`** (`DeliveryStatusMessageTest`) - map every stage of a closed delivery-status hierarchy to its message.
 4. **`doubled`** (`DoubleDistanceTest`) - double a wrapped distance value and hand back the same wrapper type.
+5. **`toPair`** (`ToPairTest`) - destructure a data class into a Pair via componentN().
+6. **`renamedWithIndependentMembers`** (`RenamedWithIndependentMembersTest`) - copy a data class while avoiding the shallow-copy gotcha on a mutable property.
+7. **`nextLight`** (`NextLightTest`) - cycle an enum's states, choosing enum over sealed for a same-shape closed set.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

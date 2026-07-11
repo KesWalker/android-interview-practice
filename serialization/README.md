@@ -25,6 +25,10 @@ All the work is in `src/main/kotlin/serialization/Tasks.kt`.
 2. **`decodeLenientProfile`** (`DecodeLenientProfileTest`) — parse profile JSON that may carry fields the model doesn't declare.
 3. **`decodePreferences`** (`DecodePreferencesTest`) — parse preferences JSON that might leave some fields out.
 4. **`decodeShapes`** (`DecodeShapesTest`) — parse a JSON array into the right shape subtype per element.
+5. **`decodeAccount`** (`DecodeAccountTest`) — parse account JSON into a model whose property has a renamed canonical JSON key, while still accepting older key names some clients may still send.
+6. **`encodeSession`** (`EncodeSessionTest`) — encode a model so a field never appears in the JSON at all.
+7. **`decodeSettingsLenient`** (`DecodeSettingsLenientTest`) — parse settings JSON that may send an explicit null for a non-nullable field with a default, falling back to that default instead of throwing.
+8. **`CentsSerializer`** (`CentsSerializerTest`) — write a custom `KSerializer` for a value class so it reads and writes as a plain decimal string instead of the default numeric representation.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

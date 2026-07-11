@@ -29,6 +29,8 @@ yourself, or pair with the tutor and let it nudge you toward it.
 2. **`refreshArticles`** (`RefreshArticlesTest`) — fetch, trim, and save into the local store, which is the single source of truth.
 3. **`loadOnDispatcher`** (`LoadOnDispatcherTest`) — run blocking work on an injected dispatcher instead of the caller's context.
 4. **`ArticleCache`** (`ArticleCacheTest`) — record hits on a shared cache without losing updates under concurrent access.
+5. **`observeArticlesByQuery`** (`ObserveArticlesByQueryTest`) — expose an ongoingly-updating filtered Flow instead of a one-shot suspend function.
+6. **`logEvent`** (`LogEventTest`) — launch app-scoped work that survives the caller's own scope being cancelled.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

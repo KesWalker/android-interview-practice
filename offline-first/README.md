@@ -27,6 +27,9 @@ All the work is in `src/main/kotlin/offline/Tasks.kt`.
 2. **`PendingWriteQueue.enqueue` / `.drain`** (`PendingWriteQueueTest`) — queue writes made while offline and flush them, in order, when the app is ready to sync.
 3. **`resolveConflict`** (`ConflictResolutionTest`) — pick the winning version between a local and a remote edit of the same record.
 4. **`toUiState`** (`ToUiStateTest`) — turn a cached value plus an optional fetch error into the state the UI should render.
+5. **`chooseWriteStrategy`** (`ChooseWriteStrategyTest`) — decide between online-only, queued, and lazy writes based on what a write can't afford to lose.
+6. **`classifySyncOutcome`** (`ClassifySyncOutcomeTest`) — map a sync attempt to the success/retry/failure outcome a `WorkManager` worker's `doWork()` would return.
+7. **`deleteLocally`** (`DeleteLocallyTest`) — tombstone a deleted record instead of hard-removing it, so the deletion has something to sync.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

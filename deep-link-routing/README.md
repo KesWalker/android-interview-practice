@@ -24,7 +24,7 @@ to a test class, or from a terminal:
 All the work is in `src/main/kotlin/deeplink/Tasks.kt`. The supporting types
 (`ParsedUri`, `Destination`, `LinkKind`) are already written for you; you're only
 filling in the functions. The tasks build on each other, so solving them in order
-(1 → 2 → 3 → 4) is the smoothest path.
+(1 → 2 → 3 → 4 → 5) is the smoothest path.
 
 1. **`parseUri`** (`ParseUriTest`) — split a raw URI string into scheme, host, path
    segments, and query params.
@@ -34,6 +34,9 @@ filling in the functions. The tasks build on each other, so solving them in orde
    `Destination`, falling back to `Unknown` when nothing matches.
 4. **`classifyLink`** (`ClassifyLinkTest`) — tell a verified app link apart from an
    unverified web link and a custom-scheme deep link.
+5. **`matchesFilter`** (`MatchesFilterTest`) — decide whether an implicit intent
+   matches a declared `<intent-filter>`'s action and category lists, including the
+   classic forgot-`CATEGORY_DEFAULT` gotcha.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

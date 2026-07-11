@@ -34,6 +34,13 @@ yourself, or pair with the tutor and let it nudge you toward it.
    out with its whitespace trimmed.
 4. **`TodoList.items`** (`TodoListItemsTest`) — a read-only view of the list
    this class holds internally.
+5. **`configuredAttempts`** (`ConfiguredAttemptsTest`) — read a primitive
+   `var` backed by `Delegates.notNull()`, the lateinit alternative for types
+   that can't be null-sentinelled.
+6. **`Rectangle.area`** (`RectangleAreaTest`) — a computed getter with no
+   backing field, always derived fresh from `width`/`height`.
+7. **`Account.deposit`/`withdraw`** (`AccountTest`) — mutate a `private set`
+   property only from inside its own class.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

@@ -27,6 +27,8 @@ nudge you toward it.
 2. **`widenToAnimalProducer`** (`WidenProducerTest`) — re-type a `Producer<Dog>` as a `Producer<Animal>`.
 3. **`narrowToDogHandler`** (`NarrowHandlerTest`) — re-type an `AnimalHandler<Animal>` as an `AnimalHandler<Dog>`.
 4. **`sumBoxes`** (`SumBoxesTest`) — sum the values held in a list of boxes whose exact element type isn't known.
+5. **`maxByNaturalOrder`** (`MaxByNaturalOrderTest`) — return the greater of two values for a type parameter that needs a multi-bound `where` clause.
+6. **`runTwiceWrapped`** (`RunTwiceWrappedTest`) — wrap a `crossinline` lambda in a `Runnable` that calls it twice when run.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

@@ -32,6 +32,18 @@ All the work is in `src/main/kotlin/work/Tasks.kt`.
    `maxAttempts` is reached and report the failure instead of looping forever.
 4. **`backoffMillis`** (`BackoffDelayTest`) — the delay before a given retry
    attempt, growing as attempts climb.
+5. **`restartBehavior`** (`RestartBehaviorTest`) — what a killed started
+   service does on restart, given its `onStartCommand` return flag
+   (`START_STICKY` / `START_NOT_STICKY` / `START_REDELIVER_INTENT`).
+6. **`canStartForegroundService`** (`CanStartForegroundServiceTest`) — whether
+   the app is currently allowed to call `startForegroundService()`, given
+   Android 12's background-start restriction.
+7. **`constraintsSatisfied`** (`ConstraintsSatisfiedTest`) — whether a
+   WorkManager job's declared constraints (network, charging, battery) are
+   met by the device's current conditions.
+8. **`chooseScheduler`** (`ChooseSchedulerTest`) — pick AlarmManager,
+   WorkManager, or a plain coroutine for a job based on its timing and
+   durability needs.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk
 you through each one and tick them off as your tests go green.

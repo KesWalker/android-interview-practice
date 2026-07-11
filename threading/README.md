@@ -31,6 +31,9 @@ All the work is in `src/main/kotlin/threading/Tasks.kt`.
    time and runs only the ones that are due, earliest first.
 4. **`StoppableQueue`** (`StoppableQueueTest`) — can be stopped by dropping
    everything, or by running what's already due first and dropping the rest.
+5. **`IdleAwareQueue`** (`IdleAwareQueueTest`) — mirrors
+   `MessageQueue.addIdleHandler`: fires an idle listener once, exactly when
+   there's no more pending work left to run.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

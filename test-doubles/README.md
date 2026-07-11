@@ -31,6 +31,11 @@ All the work is in `src/main/kotlin/doubles/Tasks.kt`.
 4. **`SignupService`** (`SignupServiceTest`) — a service that registers a new
    email, skips duplicates, and reports whether the welcome email went out,
    tested by wiring the fake and spy from tasks 1-3 together.
+5. **`ScriptedEmailSender`** (`ScriptedEmailSenderTest`) — a hand-rolled
+   strict mock: an `EmailSender` that must be explicitly stubbed before use,
+   and fails loudly on an unstubbed call instead of returning a default.
+6. **`validateSignupEmail`** (`ValidateSignupEmailTest`) — reject an obviously
+   invalid email before it reaches the store or the email sender.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

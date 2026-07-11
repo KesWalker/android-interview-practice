@@ -29,6 +29,7 @@ All the work is in `src/main/kotlin/savedstate/Tasks.kt`.
 2. **`restoreState`** (`RestoreStateTest`) — rebuild a screen's state from what was saved, falling back to defaults for anything missing.
 3. **`ensureWithinSizeLimit`** (`SizeLimitTest`) — reject saved state that's grown too large to persist.
 4. **`recreate`** (`RecreateTest`) — model which piece of state survives a config change versus a process death.
+5. **`recreateForCause`** (`RecreateForCauseTest`) — extend that model to a third cause, task removal, which loses both the ViewModel field and the saved-state field.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

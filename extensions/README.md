@@ -34,6 +34,10 @@ it nudge you toward the idiom.
    extension, wiring up `point[i]` indexing.
 4. **`Meters.parse`** (`MetersParseTest`) — an extension on a companion object, so it
    reads like a static factory call.
+5. **`kindsOf`** (`KindsOfTest`) — extensions resolve on the declared type of a
+   reference, not its runtime type, unlike a real virtual member.
+6. **`greetTwice`** (`GreetTwiceTest`) — a member function always wins over an
+   extension declared with the same signature.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

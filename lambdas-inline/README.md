@@ -28,6 +28,8 @@ or pair with the tutor and let it nudge you toward it.
 2. **`makeCounter`** (`CounterTest`) — return a callable that tracks its own call count.
 3. **`indexOfFirstNegative`** (`IndexOfFirstNegativeTest`) — find the index of the first negative number, or -1.
 4. **`filterIsInstance2`** (`FilterIsInstanceTest`) — keep only the elements of a mixed list that match a given type.
+5. **`timedRun`** (`TimedRunTest`) — run a `crossinline` action wrapped inside a `Runnable`, logging before and after.
+6. **`registerHandlers`** (`RegisterHandlersTest`) — call one lambda immediately and stash a `noinline` one for later.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

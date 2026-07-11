@@ -35,6 +35,14 @@ All the work is in `src/main/kotlin/tokens/Tasks.kt`.
 4. **`ExpiringTokenCache`** (`ExpiringTokenCacheTest`) — cache a token until it
    expires, and make sure a failed refresh propagates without corrupting what was
    cached before.
+5. **`RotatingRefreshTokenStore`** (`RotatingRefreshTokenStoreTest`) — rotate the
+   refresh token on every successful refresh, and revoke the whole token family
+   if a stale, already-rotated token is ever replayed.
+6. **`attemptRefresh`** (`AttemptRefreshTest`) — treat a 401 on the refresh call
+   itself as a clean session expiry instead of retrying, while letting any other
+   failure propagate.
+7. **`redactForLogging`** (`RedactForLoggingTest`) — mask the Authorization
+   header's value before request/response data ever reaches a debug log line.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

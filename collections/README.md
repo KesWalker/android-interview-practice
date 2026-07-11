@@ -33,6 +33,10 @@ All the work is in `src/main/kotlin/collections/Tasks.kt`.
    length, keeping order.
 4. **`firstSquareOver`** (`FirstSquareOverTest`) — return the first perfect square
    past a threshold, without pre-computing every square up to it.
+5. **`packInto`** (`PackIntoTest`) — copy a fixed-size Array into a genuinely
+   growable list plus one more element.
+6. **`frozen`** (`FrozenListTest`) — build a genuinely immutable persistent list,
+   not just a read-only view over a mutable one.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

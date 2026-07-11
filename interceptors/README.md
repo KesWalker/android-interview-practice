@@ -32,6 +32,12 @@ yourself, or pair with the tutor and let it nudge you toward it.
    without continuing, or continue and store the result for next time.
 4. **`retryOnUnauthorized`** (`RetryOnUnauthorizedTest`) — refresh the token and
    retry once when the response comes back unauthorized.
+5. **`offlineFallbackInterceptor`** (`OfflineFallbackInterceptorTest`) — serve a
+   cached response for a request's path only when offline, otherwise always go
+   to the network.
+6. **`verifyCertificatePin`** (`VerifyCertificatePinTest`) — check a host's
+   actual certificate hash against its pinned accepted hashes, failing closed
+   on a mismatch.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

@@ -30,6 +30,9 @@ yourself, or pair with the tutor and let it nudge you toward it.
 2. **`latestPair`** (`LatestPairTest`) — pair whichever source just emitted with the other's most recent value.
 3. **`safeDivideFlow`** (`SafeDivideFlowTest`) — emit divided values, recovering a divide-by-zero into -1.
 4. **`searchResults`** (`SearchResultsTest`) — search on each query, abandoning any still-running older search.
+5. **`numbersOn`** (`NumbersOnTest`) — emit values while running the producer on an injected dispatcher, proving flowOn only shifts the upstream side.
+6. **`conflatedTicks`** (`ConflatedTicksTest`) — drop stale values for a slow collector instead of buffering or backpressuring the producer.
+7. **`listenerAsFlow`** (`ListenerAsFlowTest`) — wrap a callback-style listener API as a cold Flow, unregistering it when collection stops.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

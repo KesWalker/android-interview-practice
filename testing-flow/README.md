@@ -31,6 +31,13 @@ yourself, or pair with the tutor and let it nudge you toward it.
 2. **`SearchPresenter.search`** (`SearchPresenterTest`) — report loading around a repository call, then publish its results.
 3. **`aboveThreshold`** (`AboveThresholdTest`) — keep only the Flow values above a threshold.
 4. **`ticker`** (`TickerTest`) — emit an incrementing count forever, on a fixed interval.
+5. **`AuditLogger.start`** (`EagerAuditLogTest`) — start collecting a Flow the
+   moment `start()` is called; the test contrasts `UnconfinedTestDispatcher`'s
+   eager dispatch against `StandardTestDispatcher`'s queued dispatch for the
+   exact same code.
+6. **`resultsFlow`** (`ResultsFlowTest`) — emit a finite list as a Flow, tested
+   with [Turbine](https://github.com/cashapp/turbine)'s `test { }` DSL
+   (`awaitItem`/`awaitComplete`) instead of a plain collected list.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

@@ -3,11 +3,12 @@
 Practice module for the **HashMap Internals & Locks** topic on Android Interview Prep.
 
 You're hardening a set of tiny map-backed helpers that are about to be shared
-across threads: a lookup key, a hit counter, a compute-once cache, and a
-read/write-locked directory. Each task is a small type that's currently
-broken or unwritten, with a matching test that's **red**. Make each test
-**green**, one at a time, and you'll have written the HashMap and
-concurrency idioms that come up constantly in interviews.
+across threads: a lookup key, a hit counter, a compute-once cache, a
+read/write-locked directory, a fixed-capacity LRU cache, and a safe way to
+remove matching entries while iterating a map. Each task is a small type
+that's currently broken or unwritten, with a matching test that's **red**.
+Make each test **green**, one at a time, and you'll have written the HashMap
+and concurrency idioms that come up constantly in interviews.
 
 ## How to run it
 
@@ -28,6 +29,8 @@ idiom yourself, or pair with the tutor and let it nudge you toward it.
 2. **`HitCounter`** (`HitCounterTest`) — record hits for a key without losing any when many threads call it at once.
 3. **`ComputeOnceCache`** (`ComputeOnceCacheTest`) — compute a missing value once and reuse it, even when many threads ask for it at once.
 4. **`SafeDirectory`** (`SafeDirectoryTest`) — let reads run alongside each other, but a write must exclude everything else.
+5. **`LruCache`** (`LruCacheTest`) — evict the least-recently-used entry once capacity is exceeded, where a read counts as a use.
+6. **`removeMatching`** (`RemoveMatchingTest`) — remove matching entries from a map while iterating it, without a ConcurrentModificationException.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

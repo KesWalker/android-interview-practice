@@ -6,10 +6,12 @@ You're building a small set of hot-flow helpers that stand in for the state and
 event plumbing that shows up in real ViewModels: a counter that must stay
 correct under concurrent updates, a login flow that reports both ongoing state
 and a one-off failure, a notification stream that never blocks its publisher,
-and a way to share one upstream flow across many collectors. Each task is
-something broken or unwritten, with a matching test that's **red**. Make each
-test **green**, one at a time, and you'll have written the StateFlow/SharedFlow
-idioms that come up constantly in interviews.
+a way to share one upstream flow across many collectors, an event bus that
+suspends its publisher until a collector is ready, a lifecycle-aware collector
+that cancels (not pauses) below STARTED, and a shareIn-backed event stream.
+Each task is something broken or unwritten, with a matching test that's
+**red**. Make each test **green**, one at a time, and you'll have written the
+StateFlow/SharedFlow idioms that come up constantly in interviews.
 
 ## How to run it
 
@@ -34,6 +36,12 @@ yourself, or pair with the tutor and let it nudge you toward it.
    messages for late subscribers, and never make a publisher wait.
 4. **`toHotStateFlow`** (`ToHotStateFlowTest`) — share one upstream flow across
    every collector, starting only once something is actually collecting.
+5. **`BoundedEventBus.publish`** (`BoundedEventBusTest`) — publish onto a
+   default SharedFlow, suspending the caller until a collector is ready.
+6. **`LifecycleAwareCollector.onStateChanged`** (`LifecycleAwareCollectorTest`)
+   — start a fresh collection on STARTED, and fully cancel it below STARTED.
+7. **`toSharedEvents`** (`ToSharedEventsTest`) — shareIn one upstream flow as
+   a no-replay SharedFlow of one-off events, only running while collected.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

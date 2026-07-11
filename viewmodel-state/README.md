@@ -28,6 +28,7 @@ yourself, or pair with the tutor and let it nudge you toward it.
 2. **`UiStateHolder`** (`UiStateHolderTest`) — publish state safely as a screen loads.
 3. **`ClearableHolder`** (`ClearableHolderTest`) — shut down all background work at once.
 4. **`SingleFlightLoader`** (`SingleFlightLoaderTest`) — share one in-flight fetch instead of duplicating it.
+5. **`FakeSavedStateHandle`** (`FakeSavedStateHandleTest`) — an observable, saved-state-backed value, the `savedStateHandle.getStateFlow` idiom.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

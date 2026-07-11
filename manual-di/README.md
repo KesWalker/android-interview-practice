@@ -33,6 +33,10 @@ All the work is in `src/main/kotlin/di/Tasks.kt`.
    instance on every call.
 4. **`Container`** (`ContainerResolutionTest`) — resolve a registered binding by key,
    and fail with a clear error when a binding is missing.
+5. **`FlowScope`** (`FlowScopeTest`) — a subcomponent-style scope whose cached instances
+   are all released together.
+6. **`UserSessionFactory`** (`UserSessionFactoryTest`) — combine a graph-provided
+   dependency with a call-time parameter, the manual analogue of `@AssistedInject`.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

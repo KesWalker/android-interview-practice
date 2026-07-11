@@ -30,6 +30,8 @@ yourself, or pair with the tutor and let it nudge you toward it.
 2. **`processWithCleanup`** (`ProcessWithCleanupTest`) — run work, then always run cleanup, even on failure or cancellation.
 3. **`runIsolatedReporting`** (`RunIsolatedReportingTest`) — run every task at once, routing a failure to a callback without stopping the others.
 4. **`loadAllResults`** (`LoadAllResultsTest`) — run every task at once, collecting a success-or-failure result per task in order.
+5. **`sumReportingErrors`** (`SumReportingErrorsTest`) — sum entries, reporting ordinary exceptions to a callback without ever swallowing cancellation.
+6. **`runWithDeadline`** (`RunWithDeadlineTest`) — run work, cancelling and failing the call if it exceeds a deadline.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.

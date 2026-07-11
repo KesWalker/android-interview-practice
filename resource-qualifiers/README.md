@@ -30,6 +30,12 @@ All the work is in `src/main/kotlin/resources/Tasks.kt`.
    the survivors by qualifier precedence to find the single winner.
 4. **`closestDensity`** (`ClosestDensityTest`) — pick whichever available density
    bucket is numerically nearest the device's dpi.
+5. **`isValidQualifierOrder`** (`IsValidQualifierOrderTest`) — check whether a directory
+   name's qualifier tokens appear in Android's required precedence order.
+6. **`dpToPx` / `spToPx`** (`DensityConversionTest`) — convert a dp or sp value to
+   physical pixels, with sp additionally respecting the font-scale setting.
+7. **`windowWidthSizeClass` / `windowHeightSizeClass`** (`WindowSizeClassTest`) —
+   classify a window's width and height in dp into Compact/Medium/Expanded.
 
 Pair with the tutor on the site's **Pair** tab for this topic and it'll walk you
 through each one and tick them off as your tests go green.
