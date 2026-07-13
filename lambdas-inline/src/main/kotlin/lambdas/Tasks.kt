@@ -37,3 +37,17 @@ fun indexOfFirstNegative(numbers: List<Int>): Int {
 inline fun <reified T> filterIsInstance2(items: List<Any?>): List<T> {
     TODO("t4: keep only the elements that are actually of type T")
 }
+
+// TODO(t5): T5TimedRunTest
+// Run the given action wrapped inside a Runnable - a real object, not the direct
+// call site - logging "start:<label>" before it runs and "end:<label>" after.
+inline fun timedRun(label: String, log: MutableList<String>, crossinline action: () -> Unit) {
+    TODO("t5: log start:<label>, run the action inside a Runnable, then log end:<label>")
+}
+
+// TODO(t6): T6RegisterHandlersTest
+// Call `immediate` right away, then add `deferred` to `store` so it can be run
+// later.
+inline fun registerHandlers(immediate: () -> Unit, noinline deferred: () -> Unit, store: MutableList<() -> Unit>) {
+    TODO("t6: run immediate now and store deferred for later")
+}

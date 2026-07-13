@@ -80,3 +80,25 @@ class CalculateTotalUseCase(private val dispatcher: CoroutineDispatcher) {
         TODO("t4: return price * quantity, running the work on dispatcher")
     }
 }
+
+// A user paired with the latest news articles for them.
+data class UserNews(val user: User, val news: List<Article>)
+
+// A use case that fetches the latest news, independent of any particular user.
+class GetLatestNewsUseCase(private val articleRepository: ArticleRepository) {
+    suspend operator fun invoke(): List<Article> {
+        TODO("t5: return the latest articles from articleRepository")
+    }
+}
+
+// TODO(t5): T5GetUserNewsUseCaseTest
+// WHAT: combine a user with the latest news into a UserNews, or null when the
+// user can't be found - and in that case never ask for the news at all.
+class GetUserNewsUseCase(
+    private val getUserUseCase: GetUserUseCase,
+    private val getLatestNewsUseCase: GetLatestNewsUseCase
+) {
+    suspend operator fun invoke(userId: String): UserNews? {
+        TODO("t5: fetch the user, then the latest news, returning a UserNews, or null when there's no user")
+    }
+}

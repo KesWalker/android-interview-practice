@@ -1,5 +1,6 @@
 package flow
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -40,4 +41,48 @@ fun safeDivideFlow(divisors: List<Int>): Flow<Int> {
 // arrives.
 fun searchResults(queries: Flow<String>, search: suspend (String) -> String): Flow<String> {
     TODO("t4: switch to searching the newest query, cancelling any older search")
+}
+
+// TODO(t5): T5NumbersOnTest
+// Return a flow that emits 1, 2, 3, reporting the producer's thread name via
+// `onProducerThread` before each emission, then runs that upstream work on
+// `dispatcher` while leaving collection on whichever context the caller
+// collects with.
+fun numbersOn(dispatcher: CoroutineDispatcher, onProducerThread: (String) -> Unit): Flow<Int> {
+    TODO("t5: emit 1, 2, 3 with the producer running on dispatcher, reporting its thread name")
+}
+
+// TODO(t6): T6ConflatedTicksTest
+// Return `source` with conflate applied, so a slow collector only ever
+// processes the most recently emitted value instead of every one queued up
+// behind it.
+fun conflatedTicks(source: Flow<Int>): Flow<Int> {
+    TODO("t6: return source with conflate applied")
+}
+
+class Ticker {
+    private var onTick: ((Int) -> Unit)? = null
+    var stopCount: Int = 0
+        private set
+
+    fun start(onTick: (Int) -> Unit) {
+        this.onTick = onTick
+    }
+
+    fun tick(value: Int) {
+        onTick?.invoke(value)
+    }
+
+    fun stop() {
+        onTick = null
+        stopCount++
+    }
+}
+
+// TODO(t7): T7ListenerAsFlowTest
+// Wrap a callback-style Ticker (calls `onTick(Int)` on each tick; `stop()`
+// unregisters it) as a cold Flow<Int> using callbackFlow, unregistering the
+// listener when the collector stops.
+fun listenerAsFlow(ticker: Ticker): Flow<Int> {
+    TODO("t7: wrap the ticker's callback as a cold Flow<Int>, stopping it when collection ends")
 }

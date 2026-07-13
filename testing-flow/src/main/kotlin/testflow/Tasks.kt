@@ -65,3 +65,27 @@ fun <T : Comparable<T>> aboveThreshold(numbers: Flow<T>, threshold: T): Flow<T> 
 fun ticker(intervalMillis: Long): Flow<Int> {
     TODO("t4: emit an incrementing count every intervalMillis, forever")
 }
+
+// TODO(t5): T5EagerAuditLogTest
+class AuditLogger(
+    dispatcher: CoroutineDispatcher,
+    private val events: Flow<String>,
+) {
+    private val scope = CoroutineScope(dispatcher + Job())
+    private val _entries = MutableStateFlow<List<String>>(emptyList())
+    val entries: StateFlow<List<String>> = _entries.asStateFlow()
+
+    // Start collecting `events` on the injected dispatcher the moment start() is
+    // called, appending each emission to `entries`.
+    fun start() {
+        TODO("t5: collect events on the injected dispatcher, appending each emission to entries")
+    }
+}
+
+// TODO(t6): T6ResultsFlowTest
+// Emit every item in `results`, in order, then complete -- the finite flow this
+// task's test asserts on one emission at a time with Turbine's
+// awaitItem()/awaitComplete() instead of a plain collected list.
+fun <T> resultsFlow(results: List<T>): Flow<T> {
+    TODO("t6: emit each item of results in order, then complete")
+}

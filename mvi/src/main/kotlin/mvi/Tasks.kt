@@ -103,3 +103,57 @@ class CartEffects {
         TODO("t4: send a ShowToast effect announcing itemName was added to the cart")
     }
 }
+
+// A form screen: submitting stamps the state with the time the submit happened.
+data class FormState(val submittedAt: Long? = null)
+
+sealed interface FormIntent {
+    data class Submit(val timestampMs: Long) : FormIntent
+}
+
+// TODO(t5): T5ReduceFormTest
+// Submitting a form stamps the resulting state with a submission time. Return
+// the next FormState for a Submit intent using only the timestamp carried on
+// the intent -- the reducer itself must never call System.currentTimeMillis().
+fun reduceForm(state: FormState, intent: FormIntent): FormState {
+    TODO("t5: return the next FormState, stamping submittedAt from the intent's timestampMs")
+}
+
+// A profile screen: two independent fetches folded into one state.
+data class ProfileState(val userName: String? = null, val darkMode: Boolean = false)
+
+sealed interface ProfileIntent {
+    data class Combined(val userName: String, val darkMode: Boolean) : ProfileIntent
+}
+
+fun reduceProfile(state: ProfileState, intent: ProfileIntent): ProfileState = when (intent) {
+    is ProfileIntent.Combined -> state.copy(userName = intent.userName, darkMode = intent.darkMode)
+}
+
+class ProfileStore(initial: ProfileState = ProfileState()) {
+    private val _state = MutableStateFlow(initial)
+    val state: StateFlow<ProfileState> = _state.asStateFlow()
+    fun dispatch(intent: ProfileIntent) {
+        _state.value = reduceProfile(_state.value, intent)
+    }
+}
+
+interface ProfileUserRepository {
+    suspend fun fetchUser(): String
+}
+
+interface ProfileSettingsRepository {
+    suspend fun fetchSettings(): Boolean
+}
+
+// TODO(t6): T6ProfileStoreTest
+// Kick off a user fetch and a settings fetch concurrently; once both resolve,
+// dispatch a single Combined intent so the reducer produces one ProfileState
+// carrying both, regardless of which call finished first.
+suspend fun loadProfile(
+    store: ProfileStore,
+    userRepo: ProfileUserRepository,
+    settingsRepo: ProfileSettingsRepository
+) {
+    TODO("t6: run both fetches concurrently, then dispatch one Combined intent with both results")
+}

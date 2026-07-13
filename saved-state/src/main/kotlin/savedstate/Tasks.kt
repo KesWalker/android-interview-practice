@@ -60,3 +60,17 @@ fun ensureWithinSizeLimit(state: Map<String, Any?>, maxBytes: Int): Map<String, 
 fun recreate(state: UiState, killedProcess: Boolean): UiState {
     TODO("t4: clear viewModelField only when killedProcess is true")
 }
+
+/** The three ways a screen can come back. */
+enum class RecreationCause {
+    CONFIG_CHANGE, PROCESS_DEATH, TASK_REMOVED
+}
+
+// TODO(t5): T5RecreateForCauseTest
+// Extend recreate's two-way split into all three ways a screen can come back:
+// a config change keeps everything, process death loses only the ViewModel
+// field, and the user swiping the task away from Recents loses both the
+// ViewModel field and the saved-state field.
+fun recreateForCause(state: UiState, cause: RecreationCause): UiState {
+    TODO("t5: clear nothing, just viewModelField, or both transient fields, depending on cause")
+}

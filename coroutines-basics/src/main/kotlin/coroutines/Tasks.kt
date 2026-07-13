@@ -2,6 +2,7 @@ package coroutines
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 
 /**
  * Coroutines Basics practice.
@@ -39,4 +40,18 @@ suspend fun <T> runOn(dispatcher: CoroutineDispatcher, block: () -> T): T {
 // coroutine gets cancelled before reaching `limit`.
 suspend fun CoroutineScope.countTicks(limit: Int, onTick: (Int) -> Unit): Int {
     TODO("t4: count up to limit calling onTick, stopping early if cancelled")
+}
+
+// TODO(t5): T5FireAndForgetTest
+// Launch `block` on `scope` without waiting for it, returning the Job the caller
+// can join() or cancel(). The side effect only happens if the job runs to completion.
+fun fireAndForget(scope: CoroutineScope, block: suspend () -> Unit): Job {
+    TODO("t5: launch block on scope and return its Job without waiting for it")
+}
+
+// TODO(t6): T6BlockingCallTest
+// Bridge a suspending `block` into a blocking call site: block the calling
+// thread until `block` finishes, running it on that same thread, and return its result.
+fun <T> blockingCall(block: suspend () -> T): T {
+    TODO("t6: block the calling thread until the suspend block finishes, returning its result")
 }

@@ -1,5 +1,7 @@
 package collections
 
+import kotlinx.collections.immutable.PersistentList
+
 /**
  * Kotlin Collections & stdlib practice.
  *
@@ -42,4 +44,19 @@ fun splitByLength(words: List<String>, minLength: Int): Pair<List<String>, List<
 // greater than `threshold`, without pre-computing every square up to it.
 fun firstSquareOver(threshold: Int): Int {
     TODO("t4: return the first perfect square strictly greater than threshold")
+}
+
+// TODO(t5): T5PackIntoTest
+// Copy every element of `array` into a new growable list, then append `extra`.
+// e.g. packInto(arrayOf("a", "b"), "c") -> ["a", "b", "c"] that still supports add().
+fun <T> packInto(array: Array<T>, extra: T): MutableList<T> {
+    TODO("t5: return a growable list of the array's elements followed by extra")
+}
+
+// TODO(t6): T6FrozenListTest
+// Return a list built from `items` that cannot be mutated through any reference,
+// not just a read-only view over a mutable backing list. Unlike t1's view, any
+// "mutation" returns a new list rather than changing this one.
+fun frozen(items: List<String>): PersistentList<String> {
+    TODO("t6: return a persistent (immutable) list with the same elements as items")
 }

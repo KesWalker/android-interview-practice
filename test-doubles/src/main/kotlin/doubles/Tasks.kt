@@ -72,3 +72,24 @@ class SignupService(private val userStore: UserStore, private val emailSender: E
         )
     }
 }
+
+// TODO(t5): T5ScriptedEmailSenderTest
+// An EmailSender that must be explicitly stubbed before use; calling send()
+// without stubbing it first should fail loudly instead of silently returning a
+// default.
+class ScriptedEmailSender : EmailSender {
+    fun stub(result: Boolean) {
+        TODO("t5: remember the result that subsequent send() calls should return")
+    }
+
+    override fun send(to: String, subject: String): Boolean {
+        TODO("t5: return the stubbed result, or fail loudly if nothing was stubbed yet")
+    }
+}
+
+// TODO(t6): T6ValidateSignupEmailTest
+// Reject an obviously invalid email before it ever reaches the store or the
+// email sender.
+fun validateSignupEmail(email: String): String {
+    TODO("t6: return email unchanged, but reject a blank one or one with no '@'")
+}

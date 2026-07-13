@@ -60,3 +60,39 @@ sealed class UiState<out T> {
 fun <T> toUiState(cached: T?, errorMessage: String?): UiState<T> {
     TODO("t4: show the cached value whenever one exists (even if errorMessage is set), otherwise show the error if there is one, otherwise show loading")
 }
+
+data class WriteCharacteristics(val mustNotSilentlyFail: Boolean, val needsInstantUi: Boolean)
+
+enum class WriteStrategy { ONLINE_ONLY, LAZY, QUEUED }
+
+// TODO(t5): T5ChooseWriteStrategyTest
+// Decide which write strategy fits a write, given what it can't afford to get wrong.
+fun chooseWriteStrategy(characteristics: WriteCharacteristics): WriteStrategy {
+    TODO("t5: pick ONLINE_ONLY for a write that must not silently fail, LAZY for one that needs instant UI, QUEUED otherwise")
+}
+
+class TransientSyncException(message: String) : Exception(message)
+
+sealed class SyncOutcome {
+    object Success : SyncOutcome()
+    object Retry : SyncOutcome()
+    object Failure : SyncOutcome()
+}
+
+// TODO(t6): T6ClassifySyncOutcomeTest
+// Model what a WorkManager CoroutineWorker's doWork() should return: success when
+// the sync block completes, retry for a transient failure, and failure for
+// anything else.
+fun classifySyncOutcome(sync: () -> Unit): SyncOutcome {
+    TODO("t6: run sync and report Success, Retry on a TransientSyncException, or Failure for any other exception")
+}
+
+data class Record(val id: String, val value: String, val timestamp: Long, val deleted: Boolean = false)
+
+// TODO(t7): T7DeleteLocallyTest
+// Deleting a record offline must not remove it locally outright: mark it deleted
+// (a tombstone) so the deletion itself has something to sync instead of silently
+// vanishing with nothing left to tell the server about.
+fun deleteLocally(record: Record, deletedAtTimestamp: Long): Record {
+    TODO("t7: return a copy marked deleted with its timestamp bumped to deletedAtTimestamp")
+}

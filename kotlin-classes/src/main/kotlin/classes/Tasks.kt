@@ -58,3 +58,29 @@ value class Meters(val value: Double)
 fun doubled(distance: Meters): Meters {
     TODO("t4: return a Meters distance twice as large as `distance`")
 }
+
+// TODO(t5): T5ToPairTest
+// Destructure `point` into its x and y components and return them as a
+// Pair<Int, Int>, in (x, y) order.
+fun toPair(point: Point): Pair<Int, Int> {
+    TODO("t5: destructure the Point and return its components as an (x, y) pair")
+}
+
+// A team with a name and a mutable list of members.
+data class Team(val name: String, val members: MutableList<String>)
+
+// TODO(t6): T6RenamedWithIndependentMembersTest
+// Return a copy of `team` with the new name, but make sure mutating the copy's
+// members list afterward never affects the original team's list.
+fun renamedWithIndependentMembers(team: Team, newName: String): Team {
+    TODO("t6: copy the team with the new name and a members list independent of the original's")
+}
+
+// A traffic light, one constant per state, none carrying its own data.
+enum class TrafficLight { RED, GREEN, YELLOW }
+
+// TODO(t7): T7NextLightTest
+// Advance the traffic light to its next state: RED -> GREEN -> YELLOW -> RED.
+fun nextLight(current: TrafficLight): TrafficLight {
+    TODO("t7: return the state that follows `current`")
+}

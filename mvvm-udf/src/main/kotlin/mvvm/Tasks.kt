@@ -1,5 +1,6 @@
 package mvvm
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -79,4 +80,31 @@ fun searchUiState(
     allItems: List<Pair<String, Boolean>>
 ): Flow<SearchUiState> {
     TODO("t4: recompute SearchUiState whenever query or onlyFavorites changes")
+}
+
+// TODO(t5): T5NewsUiStateTest
+// Given a cold Flow<List<String>> and a CoroutineScope, expose it as a
+// StateFlow<FeedUiState> that starts collecting the source on first subscriber
+// and stops it 5 seconds after the last subscriber goes away.
+fun newsUiState(source: Flow<List<String>>, scope: CoroutineScope): StateFlow<FeedUiState> {
+    TODO("t5: share source as a StateFlow that runs only while subscribed, with a 5s stop timeout")
+}
+
+data class ItemListUiState(val navigateTo: String? = null)
+
+class ItemListHolder {
+    private val _state = MutableStateFlow(ItemListUiState())
+    val state: StateFlow<ItemListUiState> = _state.asStateFlow()
+
+    // TODO(t6): T6ItemListHolderTest
+    // Clicking an item should set a navigateTo field in state; the UI consumes
+    // it once and calls back to clear it so the same navigation never re-fires
+    // on a later recomposition.
+    fun onItemClicked(id: String) {
+        TODO("t6: set navigateTo to the clicked id")
+    }
+
+    fun onNavigated() {
+        TODO("t6: clear navigateTo back to null once the UI has consumed it")
+    }
 }

@@ -1,5 +1,7 @@
 package properties
 
+import kotlin.properties.Delegates
+
 /**
  * Properties, lazy & lateinit practice.
  *
@@ -50,5 +52,41 @@ class TodoList {
 
     fun add(item: String) {
         _items.add(item)
+    }
+}
+
+class RetryPolicy {
+    var maxAttempts: Int by Delegates.notNull()
+}
+
+// TODO(t5): T5ConfiguredAttemptsTest
+// Return `policy.maxAttempts`. RetryPolicy uses `by Delegates.notNull<Int>()`
+// instead of lateinit, since lateinit can't hold a primitive Int.
+fun configuredAttempts(policy: RetryPolicy): Int {
+    TODO("t5: return the policy's configured maxAttempts")
+}
+
+// TODO(t6): T6RectangleAreaTest
+// `area` should always reflect the rectangle's *current* width and height -
+// implement its getter, with no stored/cached value.
+class Rectangle(var width: Int, var height: Int) {
+    val area: Int
+        get() = TODO("t6: compute the area fresh from the current width and height")
+}
+
+// TODO(t7): T7AccountTest
+// Implement deposit and withdraw so they adjust balance from inside the class,
+// clamping withdrawals at 0. balance's setter is already private, so this is
+// the only place allowed to change it.
+class Account {
+    var balance: Int = 0
+        private set
+
+    fun deposit(amount: Int) {
+        TODO("t7: add `amount` to the balance")
+    }
+
+    fun withdraw(amount: Int) {
+        TODO("t7: subtract `amount` from the balance, clamping at 0")
     }
 }

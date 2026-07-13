@@ -1,6 +1,7 @@
 package stateflow
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -70,4 +71,45 @@ class NotificationCenter {
 // `initial`, that only runs while at least one collector is present.
 fun <T> toHotStateFlow(scope: CoroutineScope, source: Flow<T>, initial: T): StateFlow<T> {
     TODO("t4: share source as one hot flow seeded with initial, only running while collected")
+}
+
+// TODO(t5): T5BoundedEventBusTest
+class BoundedEventBus {
+    private val _events = MutableSharedFlow<Int>()
+    val events: SharedFlow<Int> = _events.asSharedFlow()
+
+    // Publish a value onto a shared event bus backed by a default
+    // MutableSharedFlow. With a subscriber attached but not yet ready, the call
+    // must suspend until it takes the value (the default SUSPEND buffer policy)
+    // rather than dropping it.
+    suspend fun publish(value: Int) {
+        TODO("t5: emit value, suspending until an attached subscriber takes it")
+    }
+}
+
+enum class LifecycleState { CREATED, STARTED, STOPPED }
+
+// TODO(t6): T6LifecycleAwareCollectorTest
+class LifecycleAwareCollector<T>(
+    private val scope: CoroutineScope,
+    private val source: Flow<T>,
+    private val onEach: (T) -> Unit,
+) {
+    private var job: Job? = null
+
+    // Start collecting `source` fresh each time the lifecycle reaches STARTED, and
+    // fully cancel (not merely pause) that collection the moment it drops below
+    // STARTED -- the repeatOnLifecycle(STARTED) contract, modelled without any real
+    // Android Lifecycle class.
+    fun onStateChanged(state: LifecycleState) {
+        TODO("t6: collect source in a fresh job on STARTED, cancel it entirely below STARTED")
+    }
+}
+
+// TODO(t7): T7ToSharedEventsTest
+// Share one upstream flow across every collector as a live SharedFlow of one-off
+// events, no replay and no initial value, only running while at least one
+// collector is present.
+fun <T> toSharedEvents(scope: CoroutineScope, source: Flow<T>): SharedFlow<T> {
+    TODO("t7: share source as a hot SharedFlow with no replay, running only while collected")
 }

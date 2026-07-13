@@ -64,3 +64,41 @@ fun bestMatch(candidates: List<Qualifiers>, device: DeviceConfig): Qualifiers? {
 fun closestDensity(available: List<Density>, deviceDpi: Int): Density {
     TODO("t4: return the available Density whose dpi is nearest deviceDpi, ties -> higher dpi")
 }
+
+// TODO(t5): T5IsValidQualifierOrderTest
+// Check whether a directory name's qualifier tokens (locale, night, density)
+// appear in Android's required precedence order - getting the order wrong
+// doesn't crash the build, the directory just silently fails to match at
+// runtime.
+fun isValidQualifierOrder(dirName: String): Boolean {
+    TODO("t5: classify each qualifier token and check their precedence ranks never go backwards")
+}
+
+// TODO(t6): T6DensityConversionTest
+// Convert a dp or sp value to physical pixels for a given device density,
+// using Android's px = dp * (dpi / 160) formula - and make spToPx additionally
+// respect the user's font-scale accessibility setting, which dpToPx ignores.
+fun dpToPx(dp: Float, densityDpi: Int): Float {
+    TODO("t6: scale dp by densityDpi against the 160dpi baseline")
+}
+
+fun spToPx(sp: Float, densityDpi: Int, fontScale: Float): Float {
+    TODO("t6: scale sp the same way as dp, then multiply by fontScale")
+}
+
+/** Android's window size buckets, from smallest to largest. */
+enum class WindowSizeClass {
+    COMPACT, MEDIUM, EXPANDED
+}
+
+// TODO(t7): T7WindowSizeClassTest
+// Classify a window's current width and height in dp into Android's
+// Compact/Medium/Expanded window size classes - the modern, window-aware
+// replacement for static sw600dp-style layout qualifiers.
+fun windowWidthSizeClass(widthDp: Int): WindowSizeClass {
+    TODO("t7: bucket widthDp using the width breakpoints")
+}
+
+fun windowHeightSizeClass(heightDp: Int): WindowSizeClass {
+    TODO("t7: bucket heightDp using the height breakpoints, which differ from the width ones")
+}

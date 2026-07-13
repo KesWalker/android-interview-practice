@@ -71,3 +71,34 @@ class Container {
         TODO("t4: return the value from the registered provider for key, or throw IllegalStateException naming the missing key")
     }
 }
+
+// TODO(t5): T5FlowScopeTest
+// A scope layered on top of the Container idea: resolving the same key twice
+// within one FlowScope returns the same cached instance, a different FlowScope
+// never shares that cache, and release() clears everything so a later resolve()
+// with the same key builds fresh.
+class FlowScope {
+    private val cache = mutableMapOf<String, Any>()
+
+    fun resolve(key: String, factory: () -> Any): Any {
+        TODO("t5: return the cached instance for key, creating it from factory on first resolve")
+    }
+
+    fun release() {
+        TODO("t5: clear the cache so a later resolve builds a fresh instance")
+    }
+}
+
+// A session that needs both a graph dependency and a call-site value.
+class UserSession(val userId: Int, val logger: Logger)
+
+// TODO(t6): T6UserSessionFactoryTest
+// The factory is built once with its graph dependency (a Logger), but
+// create(userId) needs a userId that's only known at the call site -- exactly
+// what @AssistedInject solves in real Dagger. Wire it to build a UserSession
+// from both.
+class UserSessionFactory(private val logger: Logger) {
+    fun create(userId: Int): UserSession {
+        TODO("t6: build a UserSession from the call-site userId and the injected Logger")
+    }
+}
