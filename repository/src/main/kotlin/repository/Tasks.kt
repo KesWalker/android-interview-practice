@@ -1,6 +1,7 @@
 package repository
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -68,4 +69,20 @@ class ArticleCache {
     }
 
     suspend fun hitsFor(id: String): Int = hits[id] ?: 0
+}
+
+// TODO(t5): T5ObserveArticlesByQueryTest
+// Expose a Flow<List<Article>> that re-emits the case-insensitive
+// title-filtered list every time the local store's underlying data changes,
+// not just once.
+fun observeArticlesByQuery(local: LocalArticleStore, query: String): Flow<List<Article>> {
+    TODO("t5: observe local and keep re-emitting the articles whose title matches query")
+}
+
+// TODO(t6): T6LogEventTest
+// Launch an analytics upload on the injected application-level CoroutineScope,
+// not on whatever scope called this function, so it keeps running even if the
+// screen that triggered it goes away.
+fun logEvent(appScope: CoroutineScope, event: String, upload: suspend (String) -> Unit) {
+    TODO("t6: launch the upload of event on appScope so it outlives the caller")
 }

@@ -64,3 +64,18 @@ class SingleFlightLoader<T>(private val scope: CoroutineScope) {
         TODO("t4: if a fetch is already running, wait for and return its result instead of starting a new one")
     }
 }
+
+// TODO(t5): T5FakeSavedStateHandleTest
+// A tiny key-value handle whose getStateFlow(key, default) returns a StateFlow
+// seeded from any existing value under that key (or the given default when
+// absent), and that keeps emitting the current value after later set(key, ...)
+// calls change it.
+class FakeSavedStateHandle {
+    fun <T> getStateFlow(key: String, default: T): StateFlow<T> {
+        TODO("t5: return one StateFlow per key, seeded from the stored value or the default when absent")
+    }
+
+    fun <T> set(key: String, value: T) {
+        TODO("t5: store the value and push it to the StateFlow already handed out for this key")
+    }
+}

@@ -38,3 +38,18 @@ fun trackAndDouble(number: Int, log: MutableList<Int>): Int {
 fun summarize(order: Order?): String? {
     TODO("t4: summarize the order's items and discount, or null when order is null")
 }
+
+// TODO(t5): T5ReportLabelTest
+// Return "<title> (<pageCount> pages)", with " · published" appended when the
+// report is published, reading every value straight off `report` itself.
+fun reportLabel(report: Report): String {
+    TODO("t5: label the report from its own properties, marking it when published")
+}
+
+// TODO(t6): T6ScoreBandTest
+// Return "<band> (<score>)" where band is A/B/C/F by the usual cutoffs
+// (90/80/70). Compute the band as a local step before building the final
+// string, all as one expression.
+fun scoreBand(score: Int): String {
+    TODO("t6: work out the band for this score, then format it with the score")
+}

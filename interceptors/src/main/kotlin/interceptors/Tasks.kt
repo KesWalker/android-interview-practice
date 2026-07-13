@@ -55,3 +55,19 @@ fun cachingInterceptor(cache: MutableMap<String, Response>): Interceptor {
 fun retryOnUnauthorized(refreshToken: () -> String): Interceptor {
     TODO("t4: on a 401 response, rebuild the request with a refreshed token and continue once more")
 }
+
+// TODO(t5): T5OfflineFallbackInterceptorTest
+// Build an interceptor that serves a cached response for a request's path only
+// when the caller signals it's offline, otherwise always goes to the network.
+fun offlineFallbackInterceptor(cache: Map<String, Response>, isOffline: () -> Boolean): Interceptor {
+    TODO("t5: only when offline, serve the cached response for this path if there is one, else continue")
+}
+
+class CertificatePinningException(message: String) : Exception(message)
+
+// TODO(t6): T6VerifyCertificatePinTest
+// Given a hostname's actual certificate hash and a map of pinned hosts to their
+// accepted hashes, decide whether the connection should be allowed.
+fun verifyCertificatePin(host: String, actualHash: String, pins: Map<String, Set<String>>) {
+    TODO("t6: throw CertificatePinningException when a pinned host's hash matches none of its accepted pins")
+}

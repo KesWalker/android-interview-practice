@@ -57,3 +57,44 @@ class ExpiringTokenCache(private val refresh: suspend () -> Token) {
         TODO("t4: expose whatever token is currently cached, or null if none has been fetched yet")
     }
 }
+
+// TODO(t5): T5RotatingRefreshTokenStoreTest
+// Rotate the refresh token on every successful refresh, invalidating the old
+// one; if an already-rotated (stale) refresh token is presented again, treat it
+// as reuse and revoke the whole token family instead of accepting it.
+class TokenReuseDetectedException : IllegalStateException("Refresh token reuse detected")
+
+class RotatingRefreshTokenStore(
+    initialToken: String,
+    private val generateToken: () -> String
+) {
+    fun refresh(presentedToken: String): String {
+        TODO("t5: rotate on the currently-valid token, otherwise revoke the family and throw TokenReuseDetectedException")
+    }
+
+    fun isFamilyRevoked(): Boolean {
+        TODO("t5: report whether reuse has revoked the whole token family")
+    }
+}
+
+// TODO(t6): T6AttemptRefreshTest
+// Attempt a refresh; a 401 means the refresh token itself was rejected, so
+// report SessionExpired instead of retrying, while any other failure should
+// propagate so the caller can decide whether to retry.
+class HttpException(val code: Int) : Exception("HTTP $code")
+
+sealed interface RefreshOutcome {
+    data class Refreshed(val token: String) : RefreshOutcome
+    data object SessionExpired : RefreshOutcome
+}
+
+suspend fun attemptRefresh(refresh: suspend () -> String): RefreshOutcome {
+    TODO("t6: return Refreshed on success, SessionExpired on a 401, and let every other failure propagate")
+}
+
+// TODO(t7): T7RedactForLoggingTest
+// Prepare request headers for a debug log line: mask the Authorization header's
+// value so a bearer token never ends up in Logcat or a crash report.
+fun redactForLogging(headers: Map<String, String>): Map<String, String> {
+    TODO("t7: replace the Authorization value (any casing) with REDACTED, leaving every other header alone")
+}

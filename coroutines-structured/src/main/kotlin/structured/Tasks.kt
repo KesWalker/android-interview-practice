@@ -39,3 +39,19 @@ suspend fun runIsolatedReporting(tasks: List<suspend () -> Unit>, onError: (Thro
 suspend fun loadAllResults(tasks: List<suspend () -> Int>): List<Result<Int>> {
     TODO("t4: run every task at once, collecting a Result per task in order")
 }
+
+// TODO(t5): T5SumReportingErrorsTest
+// Sum the results of `entries`, reporting any of an entry's ordinary exceptions
+// to `onError` and continuing with the rest - but check `ensureActive()` every
+// iteration, and never treat a CancellationException as just another error to
+// report.
+suspend fun sumReportingErrors(entries: List<suspend () -> Int>, onError: (Throwable) -> Unit): Int {
+    TODO("t5: sum the entries, reporting ordinary failures to onError but rethrowing cancellation")
+}
+
+// TODO(t6): T6RunWithDeadlineTest
+// Run `work`, but cancel it and fail the call if it hasn't finished within
+// `timeoutMs`.
+suspend fun <T> runWithDeadline(timeoutMs: Long, work: suspend () -> T): T {
+    TODO("t6: run work under a deadline, failing the call if it overruns timeoutMs")
+}

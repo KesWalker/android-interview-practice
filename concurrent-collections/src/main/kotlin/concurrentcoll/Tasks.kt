@@ -67,3 +67,28 @@ class SafeDirectory {
         TODO("t4: the current number of entries, read safely alongside other reads")
     }
 }
+
+// TODO(t5): T5LruCacheTest
+// A fixed-capacity cache that evicts the least-recently-used entry once full;
+// reading an entry with get() counts as a use and protects it from eviction.
+// keysInOrder() lists keys from least- to most-recently-used.
+class LruCache<K, V>(private val capacity: Int) {
+    fun put(key: K, value: V) {
+        TODO("t5: store key/value, evicting the least-recently-used entry when over capacity")
+    }
+
+    fun get(key: K): V? {
+        TODO("t5: return the value for key (marking it most-recently-used), or null when absent")
+    }
+
+    fun keysInOrder(): List<K> {
+        TODO("t5: return the keys ordered from least- to most-recently-used")
+    }
+}
+
+// TODO(t6): T6RemoveMatchingTest
+// Remove every entry from `map` whose value satisfies `predicate`, mutating the
+// map in place without throwing a ConcurrentModificationException.
+fun <K, V> removeMatching(map: MutableMap<K, V>, predicate: (V) -> Boolean) {
+    TODO("t6: remove in place every entry whose value matches predicate, without a ConcurrentModificationException")
+}

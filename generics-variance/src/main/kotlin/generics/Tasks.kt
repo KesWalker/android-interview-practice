@@ -49,3 +49,17 @@ class NumberBox<out T : Number>(val value: T)
 fun sumBoxes(boxes: List<NumberBox<*>>): Double {
     TODO("t4: sum every box's value as a Double")
 }
+
+// TODO(t5): T5MaxByNaturalOrderTest
+// Return whichever of `a` and `b` is greater, for a type parameter that must be
+// both a CharSequence and Comparable to itself.
+fun <T> maxByNaturalOrder(a: T, b: T): T where T : CharSequence, T : Comparable<T> {
+    TODO("t5: return the greater of a and b")
+}
+
+// TODO(t6): T6RunTwiceWrappedTest
+// Return a Runnable that calls `block` twice when it's run, given `block` as a
+// crossinline inline-function parameter.
+inline fun runTwiceWrapped(crossinline block: () -> Unit): Runnable {
+    TODO("t6: return a Runnable that calls block twice when run")
+}

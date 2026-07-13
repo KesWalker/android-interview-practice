@@ -77,3 +77,22 @@ class StoppableQueue {
         TODO("t4: run every pending action already due by now, then drop whatever is left")
     }
 }
+
+// TODO(t5): T5IdleAwareQueueTest
+// Add an idle-listener hook to a message-draining queue: fire it once, exactly
+// when there is no more pending work left to run, mirroring Android's
+// MessageQueue.addIdleHandler, which only fires once the queue has nothing left
+// to dispatch.
+class IdleAwareQueue {
+    fun post(action: () -> Unit) {
+        TODO("t5: queue this action to run on the next drain")
+    }
+
+    fun addIdleListener(listener: () -> Unit) {
+        TODO("t5: remember this listener to run once the queue has nothing left to dispatch")
+    }
+
+    fun runToCompletion() {
+        TODO("t5: drain every pending action first, and only once none are left fire the idle listeners once each")
+    }
+}

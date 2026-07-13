@@ -65,3 +65,24 @@ fun route(uri: ParsedUri): Destination {
 fun classifyLink(uri: ParsedUri, verifiedHosts: Set<String>): LinkKind {
     TODO("t4: classify uri as verified app link, unverified web link, or custom scheme")
 }
+
+/** An implicit intent: an action plus the categories it carries. */
+data class IntentSpec(
+    val action: String,
+    val categories: Set<String> = emptySet(),
+)
+
+/** An intent-filter as declared in the manifest. */
+data class IntentFilterSpec(
+    val actions: Set<String>,
+    val categories: Set<String>,
+)
+
+// TODO(t5): T5MatchesFilterTest
+// Decide whether an implicit IntentSpec (an action plus the categories it
+// carries, exactly what startActivity() auto-stamps CATEGORY_DEFAULT onto)
+// matches a declared IntentFilterSpec's action and category lists - the action
+// and category tests Android runs before ever considering intent-filter data.
+fun matchesFilter(intent: IntentSpec, filter: IntentFilterSpec): Boolean {
+    TODO("t5: match the intent's action against the filter, then every intent category")
+}

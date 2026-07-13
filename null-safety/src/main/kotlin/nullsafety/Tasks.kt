@@ -39,3 +39,28 @@ fun validAges(raw: List<String>): List<Int> {
 fun shout(value: Any?): String? {
     TODO("t4: uppercase value only when it's a String, else null")
 }
+
+class SessionCache {
+    var token: String? = null
+}
+
+// TODO(t5): T5TokenStatusTest
+// SessionCache.token is a mutable var property. Return "Token: <token> (<n> chars)"
+// when it's set, or "No token set" when it's null (no `!!`).
+fun tokenStatus(cache: SessionCache): String {
+    TODO("t5: describe the token when set, else 'No token set'")
+}
+
+// TODO(t6): T6DiscountPercentTest
+// Given a nullable discount code like "20OFF", return the percent as an Int, or
+// null when the code is null, malformed, or doesn't parse.
+fun discountPercent(code: String?): Int? {
+    TODO("t6: pull the percent out of a well-formed code, else null")
+}
+
+// TODO(t7): T7ValidatedConfigTest
+// Return `config` unchanged when it's non-null; throw an IllegalArgumentException
+// with the message "config is required" when it's null (no `!!`).
+fun validatedConfig(config: String?): String {
+    TODO("t7: return config, or throw IllegalArgumentException('config is required') when null")
+}

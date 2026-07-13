@@ -41,3 +41,29 @@ class Meters(val value: Double) {
 fun Meters.Companion.parse(raw: String): Meters? {
     TODO("t4: parse \"<number>m\" into Meters, or null when it doesn't match")
 }
+
+open class Shape
+class Circle : Shape()
+
+fun Shape.kind(): String = "shape"
+fun Circle.kind(): String = "circle"
+
+// TODO(t5): T5KindsOfTest
+// Return each shape's `.kind()`, one per element, in order, given a list of
+// Shape (all of them actually Circle underneath).
+fun kindsOf(shapes: List<Shape>): List<String> {
+    TODO("t5: return each shape's kind(), in order")
+}
+
+class Greeter {
+    fun greet(): String = "member"
+}
+
+fun Greeter.greet(): String = "extension"
+
+// TODO(t6): T6GreetTwiceTest
+// Call `g.greet()` twice and concatenate the results, given a Greeter that
+// declares both a member greet() and an extension greet().
+fun greetTwice(g: Greeter): String {
+    TODO("t6: call g.greet() twice and concatenate the results")
+}
