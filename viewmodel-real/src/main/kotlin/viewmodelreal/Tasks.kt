@@ -30,11 +30,11 @@ class CounterViewModel : ViewModel() {
     val count: StateFlow<Int> = _count.asStateFlow()
 
     fun increment() {
-        _count.update { it + 1 }
+        TODO("t1: _count.update { it + 1 }")
     }
 
     fun reset() {
-        _count.update { 0 }
+        TODO("t1: _count.update { 0 }")
     }
 }
 
@@ -48,12 +48,7 @@ class TickerViewModel : ViewModel() {
     val tickCount: StateFlow<Int> = _tickCount.asStateFlow()
 
     fun startTicking() {
-        viewModelScope.launch {
-            while (true) {
-                delay(1000)
-                _tickCount.update { it + 1 }
-            }
-        }
+        TODO("t2: viewModelScope.launch { while (true) { delay(1000); _tickCount.update { it + 1 } } }")
     }
 }
 
@@ -62,10 +57,12 @@ class TickerViewModel : ViewModel() {
 // simulated process death, and make `updateNote` write through the same handle so a ViewModel
 // rebuilt with it picks up the latest value.
 class NoteViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
-    val noteState: StateFlow<String> = savedStateHandle.getStateFlow(KEY_NOTE, "")
+    val noteState: StateFlow<String> = TODO(
+        "t3: savedStateHandle.getStateFlow(KEY_NOTE, \"\")"
+    )
 
     fun updateNote(text: String) {
-        savedStateHandle[KEY_NOTE] = text
+        TODO("t3: savedStateHandle[KEY_NOTE] = text")
     }
 
     companion object {
@@ -81,8 +78,7 @@ class GreeterViewModel(val greeting: String) : ViewModel()
 
 class GreeterViewModelFactory(private val greeting: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        @Suppress("UNCHECKED_CAST")
-        return GreeterViewModel(greeting) as T
+        TODO("t4: @Suppress(\"UNCHECKED_CAST\") return GreeterViewModel(greeting) as T")
     }
 }
 
@@ -96,9 +92,7 @@ interface ItemsRepository {
 // upstream subscription: it starts on the first subscriber and is kept alive for 5 seconds
 // after the last one leaves, so a quick rotation doesn't retrigger the repository's fetch.
 class ItemsViewModel(repository: ItemsRepository) : ViewModel() {
-    val items: StateFlow<List<String>> = repository.items.stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
-        emptyList()
+    val items: StateFlow<List<String>> = TODO(
+        "t5: repository.items.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())"
     )
 }

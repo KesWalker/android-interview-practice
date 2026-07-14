@@ -28,27 +28,27 @@ import kotlinx.coroutines.launch
 // its states.
 class RecordingObserver(private val events: MutableList<String>) : DefaultLifecycleObserver {
     override fun onCreate(owner: LifecycleOwner) {
-        events.add("CREATE")
+        TODO("t1: events.add(\"CREATE\")")
     }
 
     override fun onStart(owner: LifecycleOwner) {
-        events.add("START")
+        TODO("t1: events.add(\"START\")")
     }
 
     override fun onResume(owner: LifecycleOwner) {
-        events.add("RESUME")
+        TODO("t1: events.add(\"RESUME\")")
     }
 
     override fun onPause(owner: LifecycleOwner) {
-        events.add("PAUSE")
+        TODO("t1: events.add(\"PAUSE\")")
     }
 
     override fun onStop(owner: LifecycleOwner) {
-        events.add("STOP")
+        TODO("t1: events.add(\"STOP\")")
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
-        events.add("DESTROY")
+        TODO("t1: events.add(\"DESTROY\")")
     }
 }
 
@@ -63,11 +63,10 @@ fun collectWhileStarted(
     scope: CoroutineScope,
     collected: MutableList<Int>
 ): Job {
-    return scope.launch {
-        owner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            source.collect { collected.add(it) }
-        }
-    }
+    TODO(
+        "t2: scope.launch { owner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { " +
+            "source.collect { collected.add(it) } } }"
+    )
 }
 
 // TODO(t3): T3PlainLifecycleScopeTest
@@ -79,9 +78,7 @@ fun collectAlways(
     source: Flow<Int>,
     collected: MutableList<Int>
 ): Job {
-    return owner.lifecycleScope.launch {
-        source.collect { collected.add(it) }
-    }
+    TODO("t3: owner.lifecycleScope.launch { source.collect { collected.add(it) } }")
 }
 
 // TODO(t4): T4FlowWithLifecycleTest
@@ -94,10 +91,10 @@ fun collectWithFlowWithLifecycle(
     scope: CoroutineScope,
     collected: MutableList<Int>
 ): Job {
-    return scope.launch {
-        source.flowWithLifecycle(owner.lifecycle, Lifecycle.State.STARTED)
-            .collect { collected.add(it) }
-    }
+    TODO(
+        "t4: scope.launch { source.flowWithLifecycle(owner.lifecycle, Lifecycle.State.STARTED)" +
+            ".collect { collected.add(it) } }"
+    )
 }
 
 // TODO(t5): T5LiveDataObservationTest
@@ -109,5 +106,5 @@ fun observeWhileActive(
     source: LiveData<Int>,
     observed: MutableList<Int>
 ) {
-    source.observe(owner) { value -> observed.add(value) }
+    TODO("t5: source.observe(owner) { value -> observed.add(value) }")
 }
