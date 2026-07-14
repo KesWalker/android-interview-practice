@@ -1,0 +1,47 @@
+{
+  "repoPath": "coil-images",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "You're going to wire up real Coil image loading: AsyncImage, its state machine, crossfades, and the memory cache. Every test uses coil-test's FakeImageLoaderEngine, so requests resolve instantly and offline, no real network needed. Each task has a failing test to turn green, and you can watch your work live in the Android Studio preview for each task.",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "AsyncImageStatus - load an image and track its state",
+      "detail": "Load model with AsyncImage and track its AsyncImagePainter.State through the onState callback into a remembered status string, then render the image plus a 'Status: ...' line.",
+      "hint": "var status by remember { mutableStateOf(\"Loading\") }; Column(modifier) { AsyncImage(model, contentDescription, imageLoader, Modifier.size(64.dp), onState = { status = it.toStatusLabel() }); Text(\"Status: $status\") }. toStatusLabel() already exists.",
+      "test": "T1AsyncImageStatusTest",
+      "verify": "T1AsyncImageStatusTest is green: after the fake request settles, the screen shows 'Status: Loaded' and the content description is present."
+    },
+    {
+      "id": "t2",
+      "title": "PlaceholderOrErrorImage - placeholder vs error state",
+      "detail": "A null model shouldn't fire a request at all: show a 'No image' placeholder directly. A failed request (State.Error) needs a 'Couldn't load image' fallback instead of a blank space or a crash. Otherwise render normally.",
+      "hint": "if (model == null) { Text(\"No image\", modifier); return }; then the same status-tracking shape as AsyncImageStatus, but rendering just `status` (not prefixed with 'Status: ').",
+      "test": "T2PlaceholderOrErrorImageTest",
+      "verify": "T2PlaceholderOrErrorImageTest is green across all three cases: null model, a failing request, and a succeeding one."
+    },
+    {
+      "id": "t3",
+      "title": "crossfadeRequestFor - a request that fades in",
+      "detail": "Build an ImageRequest that crossfades in on load instead of popping in abruptly. This is a plain function, not a composable; CrossfadeImage already calls it and is pre-written.",
+      "hint": "return ImageRequest.Builder(context).data(model).crossfade(durationMillis).build().",
+      "test": "T3CrossfadeRequestForTest",
+      "verify": "T3CrossfadeRequestForTest is green: the built request's transitionFactory is a CrossfadeTransition.Factory with the given duration, and CrossfadeImage still renders the loaded image."
+    },
+    {
+      "id": "t4",
+      "title": "memoryCacheKeyFor - don't let a thumbnail and a full image collide",
+      "detail": "Coil's default memory cache key doesn't account for the size an image was decoded at, so a thumbnail and a full-size load of the same URL can steal each other's cached bitmap. Build a MemoryCache.Key whose extras include the requested size.",
+      "hint": "return MemoryCache.Key(key = url, extras = mapOf(\"w\" to size.width.toString(), \"h\" to size.height.toString())).",
+      "test": "T4MemoryCacheKeyForTest",
+      "verify": "T4MemoryCacheKeyForTest is green: a 40x40 and a 400x400 key for the same url differ, but two 40x40 keys for the same url are equal."
+    },
+    {
+      "id": "t5",
+      "title": "SwappableImage - replacing a request when the model changes",
+      "detail": "AsyncImage already cancels an in-flight request and starts a new one whenever model changes; the composable just needs to reflect the CURRENT model correctly, never a stale one.",
+      "hint": "Same status-tracking shape as AsyncImageStatus, but the label includes the model: Text(\"$model: $status\") and contentDescription = model?.toString().",
+      "test": "T5SwappableImageTest",
+      "verify": "T5SwappableImageTest is green: swapping model between two different fake-intercepted urls always ends with the UI reflecting whichever model is current."
+    }
+  ]
+}

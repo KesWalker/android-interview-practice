@@ -27,7 +27,7 @@ class T2PlaceholderOrErrorImageTest {
 
     private val context get() = ApplicationProvider.getApplicationContext<Context>()
 
-    @Test fun `shows a placeholder when there is no model`() {
+    @Test fun `shows a placeholder when there is no model, without firing a request`() {
         val imageLoader = ImageLoader.Builder(context).build()
 
         compose.setContent {
@@ -36,7 +36,6 @@ class T2PlaceholderOrErrorImageTest {
             }
         }
 
-        // A null model resolves to State.Empty synchronously, no request needed.
         compose.onNodeWithText("No image").assertIsDisplayed()
     }
 

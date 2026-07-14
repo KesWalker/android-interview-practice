@@ -1,0 +1,71 @@
+{
+  "repoPath": "compose-perf",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "You're going to make eight real Compose composables recompose only when they should. Each task has a failing test wired to a recomposition counter, so you can literally see how many times your code reran. You can also watch your work live in the Android Studio preview for each task as you go.",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "RecomposeCounter - counting recompositions with SideEffect",
+      "detail": "Every later task in this module leans on this trick: call a SideEffect inside the composable to notify a counter once per successful recomposition, then render the value.",
+      "hint": "SideEffect { onRecompose() } runs after composition applies changes, once per non-skipped recomposition. Put it first in the body, then Text(\"Value: $value\", modifier).",
+      "test": "T1RecomposeCounterTest",
+      "verify": "T1RecomposeCounterTest is green and RecomposeCounterPreview shows 'Value: 3'."
+    },
+    {
+      "id": "t2",
+      "title": "UnstablePayloadRow - an unstable parameter forces recomposition",
+      "detail": "UnstablePayload has a var property, which the Compose compiler infers UNSTABLE. Render payload.label and count recompositions the same way as task 1.",
+      "hint": "Same shape as RecomposeCounter: SideEffect { onRecompose() } then Text(payload.label, modifier). The lesson is in the test, not the body.",
+      "test": "T2UnstablePayloadRowTest",
+      "verify": "T2UnstablePayloadRowTest is green: it proves the row recomposes on every parent recomposition even when handed a new instance with an identical label."
+    },
+    {
+      "id": "t3",
+      "title": "StablePayloadRow - @Immutable lets Compose skip",
+      "detail": "StablePayload is a val-only @Immutable data class, the fix for task 2's problem. Same body shape as UnstablePayloadRow.",
+      "hint": "Identical implementation to UnstablePayloadRow: SideEffect { onRecompose() } then Text(payload.label, modifier). Compose does the skipping for you once the type is genuinely stable.",
+      "test": "T3StablePayloadRowTest",
+      "verify": "T3StablePayloadRowTest is green: it proves the row is SKIPPED (recompose count stays at 1) when handed a new but content-equal StablePayload."
+    },
+    {
+      "id": "t4",
+      "title": "UnstableListRow - List<String> is unstable too",
+      "detail": "List is a read-only view, not a provably immutable structure, so the compiler treats it as unstable. Render items.size and count recompositions.",
+      "hint": "SideEffect { onRecompose() } then Text(\"Items: ${items.size}\", modifier).",
+      "test": "T4UnstableListRowTest",
+      "verify": "T4UnstableListRowTest is green: recomposes every time even with a content-equal list."
+    },
+    {
+      "id": "t5",
+      "title": "StableListRow - swap List for ImmutableList",
+      "detail": "Same shape as task 4, but the parameter type is kotlinx.collections.immutable's ImmutableList, which the compiler recognizes as genuinely stable.",
+      "hint": "Identical body to UnstableListRow, just a different parameter type: SideEffect { onRecompose() } then Text(\"Items: ${items.size}\", modifier).",
+      "test": "T5StableListRowTest",
+      "verify": "T5StableListRowTest is green: recompose count stays at 1 across content-equal PersistentLists."
+    },
+    {
+      "id": "t6",
+      "title": "DeferredOffsetBox - defer a hot state read into layout",
+      "detail": "offsetPx can change on every drag/scroll tick. Modifier.offset { } reads its lambda during the LAYOUT phase instead of composition, so this composable should never recompose while offsetPx changes, only re-place.",
+      "hint": "SideEffect { onRecompose() } then Box(modifier.offset { IntOffset(offsetPx.value, 0) }.size(24.dp).background(Color.Red)). The key is that offsetPx.value is read INSIDE the offset lambda, not in the composable body directly.",
+      "test": "T6DeferredOffsetBoxTest",
+      "verify": "T6DeferredOffsetBoxTest is green: recompose count stays at 1 even after offsetPx changes five times."
+    },
+    {
+      "id": "t7",
+      "title": "LevelBadgeHost - derivedStateOf collapses updates",
+      "detail": "points changes on every point scored, but the badge should only recompose when the derived level (points / 10) actually changes.",
+      "hint": "val level by remember { derivedStateOf { points.value / 10 } }, then call LevelText(level, onBadgeRecompose, modifier) - LevelText already exists and is pre-written.",
+      "test": "T7LevelBadgeHostTest",
+      "verify": "T7LevelBadgeHostTest is green: nine point increments within the same level cause zero extra recompositions; crossing into a new level causes exactly one."
+    },
+    {
+      "id": "t8",
+      "title": "KeyedTodoList - LazyColumn key and contentType",
+      "detail": "The real interview question: without an explicit key, LazyColumn ties each item's remembered state to its position, not its identity, so reordering can leave a checkbox's checked state on the wrong todo.",
+      "hint": "LazyColumn(modifier) { items(items = items, key = { it.id }, contentType = { \"todo\" }) { todo -> TodoRow(todo) } } - TodoRow already exists and is pre-written.",
+      "test": "T8KeyedTodoListTest",
+      "verify": "T8KeyedTodoListTest is green: after reordering two todos, the checked checkbox still belongs to the same id, not the same screen position."
+    }
+  ]
+}

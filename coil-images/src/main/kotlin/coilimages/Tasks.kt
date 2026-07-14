@@ -33,38 +33,26 @@ private fun AsyncImagePainter.State.toStatusLabel(): String = when (this) {
 // inspecting pixels.
 @Composable
 fun AsyncImageStatus(model: Any?, imageLoader: ImageLoader, contentDescription: String, modifier: Modifier = Modifier) {
-    var status by remember { mutableStateOf("Loading") }
-    Column(modifier = modifier) {
-        AsyncImage(
-            model = model,
-            contentDescription = contentDescription,
-            imageLoader = imageLoader,
-            modifier = Modifier.size(64.dp),
-            onState = { status = it.toStatusLabel() },
-        )
-        Text(text = "Status: $status")
-    }
+    TODO(
+        "t1: var status by remember { mutableStateOf(\"Loading\") }; Column(modifier) { " +
+            "AsyncImage(model, contentDescription, imageLoader, Modifier.size(64.dp), onState = { status = it.toStatusLabel() }); " +
+            "Text(\"Status: \$status\") }",
+    )
 }
 
 // TODO(t2): T2PlaceholderOrErrorImageTest
-// A real image request has more than one "not loaded yet" outcome. When model is
-// null, Coil resolves straight to State.Empty with no network involved at all:
-// show a "No image" placeholder. When the request fails, State.Error fires:
-// show "Couldn't load image" instead of a blank space or a crash. Otherwise
-// render the image normally.
+// A real image slot has more than one "not the real picture" outcome. There's no
+// point sending model = null through Coil's request pipeline at all, so check for
+// it up front and show a "No image" placeholder directly, no request involved.
+// Otherwise load normally and track state through onState: when the request
+// fails, State.Error fires, so show "Couldn't load image" instead of a blank
+// space or a crash.
 @Composable
 fun PlaceholderOrErrorImage(model: Any?, imageLoader: ImageLoader, contentDescription: String, modifier: Modifier = Modifier) {
-    var status by remember { mutableStateOf("Loading") }
-    Column(modifier = modifier) {
-        AsyncImage(
-            model = model,
-            contentDescription = contentDescription,
-            imageLoader = imageLoader,
-            modifier = Modifier.size(64.dp),
-            onState = { status = it.toStatusLabel() },
-        )
-        Text(text = status)
-    }
+    TODO(
+        "t2: if (model == null) { Text(\"No image\", modifier); return }; var status by remember { mutableStateOf(\"Loading\") }; " +
+            "Column(modifier) { AsyncImage(model, contentDescription, imageLoader, Modifier.size(64.dp), onState = { status = it.toStatusLabel() }); Text(status) }",
+    )
 }
 
 // TODO(t3): T3CrossfadeRequestForTest
@@ -72,10 +60,7 @@ fun PlaceholderOrErrorImage(model: Any?, imageLoader: ImageLoader, contentDescri
 // abruptly. ImageRequest.Builder has a crossfade(durationMillis) shortcut that
 // sets up a CrossfadeTransition.Factory for you.
 fun crossfadeRequestFor(context: Context, model: Any?, durationMillis: Int): ImageRequest {
-    return ImageRequest.Builder(context)
-        .data(model)
-        .crossfade(durationMillis)
-        .build()
+    TODO("t3: return ImageRequest.Builder(context).data(model).crossfade(durationMillis).build()")
 }
 
 @Composable
@@ -105,7 +90,9 @@ data class ImageSize(val width: Int, val height: Int)
 // MemoryCache.Key whose extras include the requested width and height, so
 // different sizes of the same url get different cache entries.
 fun memoryCacheKeyFor(url: String, size: ImageSize): MemoryCache.Key {
-    return MemoryCache.Key(key = url, extras = mapOf("w" to size.width.toString(), "h" to size.height.toString()))
+    TODO(
+        "t4: return MemoryCache.Key(key = url, extras = mapOf(\"w\" to size.width.toString(), \"h\" to size.height.toString()))",
+    )
 }
 
 @Composable
@@ -134,15 +121,9 @@ fun SizedImage(url: String, size: ImageSize, imageLoader: ImageLoader, contentDe
 // confirm the UI always reflects the CURRENT model, never a stale one.
 @Composable
 fun SwappableImage(model: Any?, imageLoader: ImageLoader, modifier: Modifier = Modifier) {
-    var status by remember { mutableStateOf("Loading") }
-    Column(modifier = modifier) {
-        AsyncImage(
-            model = model,
-            contentDescription = model?.toString(),
-            imageLoader = imageLoader,
-            modifier = Modifier.size(64.dp),
-            onState = { status = it.toStatusLabel() },
-        )
-        Text(text = "$model: $status")
-    }
+    TODO(
+        "t5: var status by remember { mutableStateOf(\"Loading\") }; Column(modifier) { " +
+            "AsyncImage(model, model?.toString(), imageLoader, Modifier.size(64.dp), onState = { status = it.toStatusLabel() }); " +
+            "Text(\"\$model: \$status\") }",
+    )
 }
