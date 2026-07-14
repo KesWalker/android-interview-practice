@@ -2,6 +2,7 @@ rootProject.name = "android-interview-practice"
 
 pluginManagement {
     repositories {
+        google()
         gradlePluginPortal()
         mavenCentral()
     }
@@ -9,6 +10,7 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
+        google()
         mavenCentral()
     }
 }
@@ -56,14 +58,6 @@ include(":activity-lifecycle")
 include(":fragment-lifecycle")
 include(":broadcast-router")
 include(":manifest-merge")
-include(":recomposition")
-include(":state-hoisting")
-include(":effect-lifecycle")
-include(":measure-place")
-include(":easing-curves")
-include(":stability-inference")
-include(":window-size-class")
-include(":back-stack")
 include(":diff-util")
 include(":lifecycle-collect")
 include(":paging-source")
@@ -87,3 +81,11 @@ include(":secure-store")
 include(":input-validation")
 include(":expect-actual")
 include(":sensor-fusion")
+include(":compose-state")
+include(":compose-mental")
+include(":compose-effects")
+include(":compose-layout")
+include(":compose-animation")
+include(":material3-theming")
+include(":compose-navigation")
+include(":stability-inference")

@@ -20,6 +20,7 @@ android {
             isIncludeAndroidResources = true
             all {
                 it.systemProperty("robolectric.graphicsMode", "NATIVE")
+                it.systemProperty("roborazzi.test.record", "true")
                 it.testLogging { showStandardStreams = true }
             }
         }

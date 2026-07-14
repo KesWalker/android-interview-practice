@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "composestate"
+    namespace = "composelayout"
     compileSdk = 35
     defaultConfig { minSdk = 24 }
     buildFeatures { compose = true }
@@ -32,6 +32,7 @@ dependencies {
     implementation(composeBom)
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
 
