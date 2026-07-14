@@ -1,0 +1,55 @@
+{
+  "repoPath": "datastore-prefs",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "Second-person framing. Mention that each task is a small function that calls a real Jetpack DataStore API, with a failing test to turn green, run from the gutter in Android Studio or with ./gradlew :datastore-prefs:test --tests \"*ClassName\".",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "createStoreAndWriteCount - build a Preferences DataStore and write a typed key",
+      "detail": "Use PreferenceDataStoreFactory.create pointed at context.preferencesDataStoreFile(name) to build the store, then write value into it under COUNT_KEY with edit {}.",
+      "hint": "val store = PreferenceDataStoreFactory.create { context.preferencesDataStoreFile(name) }; store.edit { it[COUNT_KEY] = value }; return store",
+      "test": "T1CreateAndWriteTest",
+      "verify": "T1CreateAndWriteTest is green: the written value reads back correctly, and two differently-named stores don't share data."
+    },
+    {
+      "id": "t2",
+      "title": "readThemeOrDefault - fall back when a key is missing",
+      "detail": "Reading a key that was never written returns null. Read THEME_KEY and fall back to \"light\" when it's missing.",
+      "hint": "return store.data.first()[THEME_KEY] ?: \"light\"",
+      "test": "T2DefaultValueTest",
+      "verify": "T2DefaultValueTest is green: an unset key returns the default, and a key that has been written returns its real value."
+    },
+    {
+      "id": "t3",
+      "title": "incrementAtomically - edit {} as an atomic read-modify-write",
+      "detail": "Increment COUNT_KEY by reading and writing inside the same edit {} block, so it's atomic. Contrast with a naive read-then-write, which can drop updates under concurrency.",
+      "hint": "store.edit { it[COUNT_KEY] = (it[COUNT_KEY] ?: 0) + 1 }",
+      "test": "T3AtomicIncrementTest",
+      "verify": "T3AtomicIncrementTest is green: sequential increments add up, and 50 concurrent increments still land all 50, with no lost updates."
+    },
+    {
+      "id": "t4",
+      "title": "setName - a write, and the Flow that notices it",
+      "detail": "Write NAME_KEY through edit {}. store.data is already a Flow that re-emits on every successful write, no extra plumbing needed.",
+      "hint": "store.edit { it[NAME_KEY] = value }",
+      "test": "T4ObserveTest",
+      "verify": "T4ObserveTest is green: the name is written, and a Flow collected from store.data emits again after the write with the new value."
+    },
+    {
+      "id": "t5",
+      "title": "safeData - catch IOException, fall back to empty Preferences",
+      "detail": "store.data can throw IOException if the underlying file can't be read. Catch just that and emit emptyPreferences() instead; let any other exception keep propagating.",
+      "hint": "return store.data.catch { e -> if (e is IOException) emit(emptyPreferences()) else throw e }",
+      "test": "T5CatchIOExceptionTest",
+      "verify": "T5CatchIOExceptionTest is green: an IOException is swallowed into emptyPreferences(), a different exception type still propagates, and real data passes through unaffected."
+    },
+    {
+      "id": "t6",
+      "title": "createStoreMigratingFrom - bring values in from SharedPreferences",
+      "detail": "Build a DataStore that migrates existing values out of a legacy SharedPreferences file the first time it's opened, using the library's own SharedPreferencesMigration.",
+      "hint": "return PreferenceDataStoreFactory.create(migrations = listOf(SharedPreferencesMigration(context, sharedPrefsName)), produceFile = { context.preferencesDataStoreFile(dataStoreName) })",
+      "test": "T6MigrateFromSharedPreferencesTest",
+      "verify": "T6MigrateFromSharedPreferencesTest is green: a value written to the legacy SharedPreferences file shows up in the DataStore, and an empty legacy file leaves the key unset."
+    }
+  ]
+}

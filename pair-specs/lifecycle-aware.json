@@ -1,0 +1,47 @@
+{
+  "repoPath": "lifecycle-real",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "Five tasks against the real androidx.lifecycle APIs, driven by a TestLifecycleOwner you move through states by hand: a DefaultLifecycleObserver that reacts to the right callbacks, a repeatOnLifecycle(STARTED) collector that actually cancels and restarts its upstream, a plain lifecycleScope collector for contrast (it wastes work in the background), the flowWithLifecycle operator form of the same idea, and a look at how LiveData gets lifecycle-awareness for free. Each task has a failing test to turn green, and the tutor walks you through each one and ticks it off as your tests pass.",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "RecordingObserver - the right callback at the right time",
+      "detail": "Implement each DefaultLifecycleObserver override (onCreate, onStart, onResume, onPause, onStop, onDestroy) to append its event name to events, so a test can see exactly which callbacks fired, and in what order, as the owner moves through its states.",
+      "hint": "Each override is a one-liner: events.add(\"CREATE\"), events.add(\"START\"), and so on, matching the callback name.",
+      "test": "T1RecordingObserverTest",
+      "verify": "T1RecordingObserverTest is green: moving an owner from INITIALIZED all the way to DESTROYED and back down produces CREATE, START, RESUME, PAUSE, STOP, DESTROY in that order, and an observer added once the owner is already STARTED gets the catch-up CREATE, START pair immediately."
+    },
+    {
+      "id": "t2",
+      "title": "collectWhileStarted - repeatOnLifecycle really cancels the upstream",
+      "detail": "Launch source's collection inside owner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) on scope, appending every collected value to collected. The collector must actually cancel, not just stop caring, when the owner drops below STARTED, and must start a fresh collection when it reaches STARTED again.",
+      "hint": "scope.launch { owner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { source.collect { collected.add(it) } } }. The test proves real cancellation by counting how many values the upstream flow itself produces, not just how many arrive in collected.",
+      "test": "T2RepeatOnLifecycleTest",
+      "verify": "T2RepeatOnLifecycleTest is green: the upstream ticker's production count freezes the instant the owner drops below STARTED, and resumes producing fresh values once it's STARTED again."
+    },
+    {
+      "id": "t3",
+      "title": "collectAlways - the naive version, for contrast",
+      "detail": "Launch source's collection directly on owner.lifecycleScope, with no repeatOnLifecycle guard at all. This is what task 2 is protecting against: it keeps collecting even while the owner is stopped, wasting work in the background, and only stops when the owner is destroyed.",
+      "hint": "owner.lifecycleScope.launch { source.collect { collected.add(it) } }. No guard, no cancellation below STARTED, that's the whole point of this task.",
+      "test": "T3PlainLifecycleScopeTest",
+      "verify": "T3PlainLifecycleScopeTest is green: collected keeps growing even while the owner is stopped (CREATED), and only stops once the owner is DESTROYED."
+    },
+    {
+      "id": "t4",
+      "title": "collectWithFlowWithLifecycle - the operator form",
+      "detail": "Wrap source with source.flowWithLifecycle(owner.lifecycle, Lifecycle.State.STARTED) and collect that on scope. Same cancel-and-restart behaviour as collectWhileStarted, just expressed as a Flow operator instead of calling repeatOnLifecycle directly.",
+      "hint": "scope.launch { source.flowWithLifecycle(owner.lifecycle, Lifecycle.State.STARTED).collect { collected.add(it) } }.",
+      "test": "T4FlowWithLifecycleTest",
+      "verify": "T4FlowWithLifecycleTest is green: production and delivery both pause below STARTED and resume once STARTED again, matching collectWhileStarted's behaviour through the operator form."
+    },
+    {
+      "id": "t5",
+      "title": "observeWhileActive - LiveData's built-in lifecycle-awareness",
+      "detail": "Observe source with source.observe(owner) { value -> observed.add(value) }. Unlike a raw StateFlow collector, no repeatOnLifecycle wrapping is needed here: LiveData's own observe() call already only delivers while the owner is at least STARTED, and automatically redelivers the latest value once it's active again.",
+      "hint": "source.observe(owner) { value -> observed.add(value) } is the whole implementation. Compare this to task 2: LiveData gets the pause/resume/redeliver behaviour for free, StateFlow needs repeatOnLifecycle to get the same thing.",
+      "test": "T5LiveDataObservationTest",
+      "verify": "T5LiveDataObservationTest is green: values set while the owner is inactive aren't delivered immediately, but the latest one is redelivered automatically the moment the owner becomes STARTED again, and the observer stops receiving anything once the owner is DESTROYED."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "repoPath": "retrofit-api",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "Second-person framing. This one is real Retrofit and real OkHttp talking to a real local server (MockWebServer), not a stand-in. The User/NewUserRequest models and the UserApi/LegacyApi/CreateUserApi interfaces in Tasks.kt are given, genuine @GET/@Path/@Query/@POST/@Body annotations - worth reading closely since that annotation surface IS what this topic tests. Their job is a handful of functions marked TODO that build the Retrofit client or handle its edge cases. Each task has a failing test in src/test to turn green, run one at a time from the gutter in Android Studio or with ./gradlew :retrofit-api:test --tests \"*ClassName\".",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "createUserApi - build a real Retrofit client",
+      "detail": "UserApi.getUser is a real suspend fun with @GET, @Path and @Query. Build a Retrofit instance pointed at baseUrl with a kotlinx.serialization JSON converter attached, then create() a UserApi from it.",
+      "hint": "Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(Json { ignoreUnknownKeys = true }.asConverterFactory(\"application/json\".toMediaType())).build().create(UserApi::class.java)",
+      "test": "T1CreateUserApiTest",
+      "verify": "T1CreateUserApiTest is green: a user fetched from MockWebServer decodes correctly, and the query param shows up in the request path MockWebServer actually received."
+    },
+    {
+      "id": "t2",
+      "title": "createLegacyApi - the leading-slash baseUrl gotcha",
+      "detail": "Retrofit.Builder.baseUrl throws IllegalArgumentException if the string doesn't end in a slash. Normalize baseUrl (append one if it's missing) before building the client for LegacyApi the same way as createUserApi.",
+      "hint": "val normalized = if (baseUrl.endsWith(\"/\")) baseUrl else \"$baseUrl/\"",
+      "test": "T2LeadingSlashTest",
+      "verify": "T2LeadingSlashTest is green: a baseUrl missing its trailing slash still builds and resolves correctly, and (separately, no extra code needed) LegacyApi's leading-slash @GET path is shown dropping baseUrl's own path segment."
+    },
+    {
+      "id": "t3",
+      "title": "createCreateUserApi - the same client shape, for a POST",
+      "detail": "Same Retrofit-building code as createUserApi, this time create()-ing CreateUserApi, whose createUser suspend fun POSTs a @Serializable NewUserRequest as the @Body.",
+      "hint": "Same Retrofit.Builder shape as t1, just create(CreateUserApi::class.java) instead.",
+      "test": "T3CreateUserBodyTest",
+      "verify": "T3CreateUserBodyTest is green: the JSON body MockWebServer actually received decodes back to the exact NewUserRequest that was sent, and the Content-Type header says application/json."
+    },
+    {
+      "id": "t4",
+      "title": "fetchUserResult - map a 404 to a typed result",
+      "detail": "api.getUser(id) (the bare-User suspend fun) throws HttpException on any non-2xx response. Catch it: e.code() == 404 becomes NotFound, anything else becomes Failed(e.code()). A successful call becomes Found.",
+      "hint": "try { UserResult.Found(api.getUser(id)) } catch (e: HttpException) { if (e.code() == 404) UserResult.NotFound(id) else UserResult.Failed(e.code()) }",
+      "test": "T4TypedErrorTest",
+      "verify": "T4TypedErrorTest is green: a 404 maps to NotFound, a 500 maps to Failed(500), a success maps to Found, and (no extra code needed) api.getUserResponse is shown never throwing at all for that same 404, just coming back with isSuccessful == false."
+    },
+    {
+      "id": "t5",
+      "title": "authHeaderInterceptor - a real OkHttp Interceptor",
+      "detail": "Return an Interceptor that builds a new request with an Authorization: Bearer <token> header (calling tokenProvider() fresh each time, not once at construction) and continues the chain.",
+      "hint": "Interceptor { chain -> chain.proceed(chain.request().newBuilder().header(\"Authorization\", \"Bearer ${tokenProvider()}\").build()) }",
+      "test": "T5AuthInterceptorTest",
+      "verify": "T5AuthInterceptorTest is green: the Authorization header MockWebServer actually received matches the token, and it changes between two calls when tokenProvider's return value changes."
+    },
+    {
+      "id": "t6",
+      "title": "refreshingAuthenticator - refresh on 401, retry once",
+      "detail": "Return an Authenticator: on a 401, call refreshToken() and rebuild the request with the refreshed header. priorResponseCount (given) tells you how many times this chain has already retried - once it's 2 or more, return null so OkHttp gives up instead of looping forever.",
+      "hint": "Authenticator { _, response -> if (priorResponseCount(response) >= 2) null else response.request.newBuilder().header(\"Authorization\", \"Bearer ${refreshToken()}\").build() }",
+      "test": "T6RefreshAuthenticatorTest",
+      "verify": "T6RefreshAuthenticatorTest is green: a 401 followed by a 200 succeeds with the refreshed token on the retry, and two 401s in a row stop after exactly one retry instead of looping."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "repoPath": "room-db",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "Second-person framing. Tell them the entities, DAOs and database classes in Tasks.kt are given, real Room annotations, worth reading closely since that's the actual API surface this topic tests. Their job is a handful of functions marked TODO that call into that schema. Each task has a failing test in src/test to turn green, run one at a time from the gutter in Android Studio or with ./gradlew :room-db:test --tests \"*ClassName\".",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "buildDatabase - an in-memory Room database for tests",
+      "detail": "Return Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build(). No file on disk, wiped when the process exits.",
+      "hint": "Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build() - every call makes a brand new isolated database, even from the same Context.",
+      "test": "T1InMemoryDatabaseTest",
+      "verify": "T1InMemoryDatabaseTest is green: a note round trips through one in-memory database, and two separate calls to buildDatabase produce two isolated databases."
+    },
+    {
+      "id": "t2",
+      "title": "findByNormalizedTitle - use a bound :param query correctly",
+      "detail": "NoteDao.findByTitle is an exact-match @Query with a bound :title param. Normalize the incoming search query (trim, then lowercase) the same way notes are stored, then delegate to findByTitle.",
+      "hint": "return findByTitle(query.trim().lowercase())",
+      "test": "T2NormalizedLookupTest",
+      "verify": "T2NormalizedLookupTest is green: a messy-cased, padded query still finds the note, and a genuinely unmatched query returns null."
+    },
+    {
+      "id": "t3",
+      "title": "upsert - OnConflictStrategy.IGNORE vs REPLACE",
+      "detail": "insertIgnoring and insertReplacing both exist on NoteDao already. Call the right one based on keepExisting: IGNORE keeps the original row on a primary-key conflict, REPLACE overwrites it.",
+      "hint": "return if (keepExisting) insertIgnoring(note) else insertReplacing(note)",
+      "test": "T3UpsertConflictStrategyTest",
+      "verify": "T3UpsertConflictStrategyTest is green: keepExisting=true leaves the original title in place on conflict, keepExisting=false overwrites it."
+    },
+    {
+      "id": "t4",
+      "title": "renameNote - a suspend write that a Flow query notices",
+      "detail": "Call NoteDao.updateTitle(id, newTitle). The interesting part isn't the write, it's that NoteDao.observeAll()'s Flow re-emits afterward with no extra plumbing, because Room invalidates queries whenever a write touches their table.",
+      "hint": "dao.updateTitle(id, newTitle)",
+      "test": "T4RenameNoteTest",
+      "verify": "T4RenameNoteTest is green: the title updates in place, and a Flow collected from observeAll() emits again after the rename with the new title."
+    },
+    {
+      "id": "t5",
+      "title": "recordEvent - a Date through a @TypeConverter",
+      "detail": "EventEntity.occurredAt is a java.util.Date, but Room can only store it as the Long that Converters turns it into. Insert the event, then read it back by the generated id so the round trip can be checked.",
+      "hint": "val id = dao.insert(EventEntity(name = name, occurredAt = occurredAt)); return dao.findById(id.toInt())!!",
+      "test": "T5DateRoundTripTest",
+      "verify": "T5DateRoundTripTest is green: the Date read back after insert equals the Date that was written, for more than one event."
+    },
+    {
+      "id": "t6",
+      "title": "addBookToAuthor - a one-to-many @Relation loaded with @Transaction",
+      "detail": "Insert a book for authorId, then load that author back through getAuthorWithBooks (a @Transaction @Query that resolves the @Relation) and return the titles of every book attached to them.",
+      "hint": "dao.insertBook(BookEntity(authorId = authorId, title = title)); return dao.getAuthorWithBooks(authorId)!!.books.map { it.title }",
+      "test": "T6AuthorRelationTest",
+      "verify": "T6AuthorRelationTest is green: an author's book titles accumulate correctly across calls, and a second author's books never leak into the first author's list."
+    },
+    {
+      "id": "t7",
+      "title": "openTaskDatabase - a real Migration, and what happens without one",
+      "detail": "Open name as a v2 TaskDatabase. When withMigration is true, attach MIGRATION_1_2 so Room can carry a v1 file (no `done` column) forward; when it's false, don't, so Room refuses to open the old file at all.",
+      "hint": "val builder = Room.databaseBuilder(context, TaskDatabase::class.java, name); if (withMigration) builder.addMigrations(MIGRATION_1_2); return builder.build()",
+      "test": "T7MigrationTest",
+      "verify": "T7MigrationTest is green: with the migration, a row written under the v1 schema survives into v2 with done defaulted to false; without it, opening the same kind of v1 file throws IllegalStateException."
+    }
+  ]
+}

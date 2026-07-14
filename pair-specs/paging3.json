@@ -1,0 +1,47 @@
+{
+  "repoPath": "paging-list",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "Second-person framing. This is the real androidx.paging library, not a stand-in - a genuine PagingSource<Int, Movie>, a genuine PagingConfig, and paging-testing's TestPager driving it the way a real Pager would. The Movie/MovieBackend/FlakyBackend classes in Tasks.kt are given. Their job is the load()/getRefreshKey() overrides and a couple of functions marked TODO. Each task has a failing test in src/test to turn green, run one at a time from the gutter in Android Studio or with ./gradlew :paging-list:test --tests \"*ClassName\".",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "MoviePagingSource.load - a page with prev/next keys",
+      "detail": "params.key is the page index to load (0 when refreshing with a null key). Fetch pageSize items starting at pageIndex * pageSize from backend, wrap it as LoadResult.Page. prevKey is null on page 0, otherwise pageIndex - 1. nextKey is null once the backend returns fewer than pageSize items, otherwise pageIndex + 1.",
+      "hint": "val pageIndex = params.key ?: 0; val items = backend.fetchPage(pageIndex * pageSize, pageSize); LoadResult.Page(items, if (pageIndex == 0) null else pageIndex - 1, if (items.size < pageSize) null else pageIndex + 1)",
+      "test": "T1LoadPagesTest",
+      "verify": "T1LoadPagesTest is green: refresh starts at page 0 with a null prevKey, append continues from the given page index, and nextKey goes null exactly when the backend runs out of items."
+    },
+    {
+      "id": "t2",
+      "title": "MoviePagingSource.getRefreshKey - resume after invalidation",
+      "detail": "Use state.anchorPosition to find the loaded page closest to where the user was scrolled (state.closestPageToPosition), then reconstruct that page's own pageIndex from its prevKey/nextKey: prevKey + 1, or if it was the first page (prevKey null), nextKey - 1.",
+      "hint": "val anchor = state.anchorPosition ?: return null; val page = state.closestPageToPosition(anchor) ?: return null; page.prevKey?.plus(1) ?: page.nextKey?.minus(1)",
+      "test": "T2RefreshKeyTest",
+      "verify": "T2RefreshKeyTest is green: an anchor inside a later page resumes at that page's own index, an anchor in the first page resumes at 0, and no loaded pages at all returns null."
+    },
+    {
+      "id": "t3",
+      "title": "loadAllMovies - drive a PagingSource with TestPager",
+      "detail": "Build a TestPager(config, pagingSource), call refresh() first (Paging's first load is always a refresh), then keep calling append() and collecting each page's data until append() returns null, which is TestPager's own signal that pagination has ended.",
+      "hint": "val pager = TestPager(config, pagingSource); val items = mutableListOf<Movie>(); items += (pager.refresh() as LoadResult.Page).data; while (true) { val next = pager.append() ?: break; items += (next as LoadResult.Page).data }; items",
+      "test": "T3TestPagerTest",
+      "verify": "T3TestPagerTest is green: walking a ten-item catalog with a page size of four returns all ten items in order, and a catalog smaller than one page still comes back in full."
+    },
+    {
+      "id": "t4",
+      "title": "FlakyMoviePagingSource.load - Error on failure, and a retry",
+      "detail": "Same page-fetching logic as MoviePagingSource.load, but backend.fetchPage can throw. Catch the failure and return LoadResult.Error(e) instead of letting the exception escape load(). Calling load() again afterward (once the backend has recovered) should succeed normally.",
+      "hint": "try { <same fetch-and-wrap logic as t1> } catch (e: IOException) { LoadResult.Error(e) }",
+      "test": "T4LoadErrorTest",
+      "verify": "T4LoadErrorTest is green: a failing fetch comes back as LoadResult.Error rather than throwing, and calling load() again after the backend recovers returns the expected page."
+    },
+    {
+      "id": "t5",
+      "title": "moviePagingConfig - tuning knobs for a paging screen",
+      "detail": "Build a PagingConfig for pageSize items at a time: initialLoadSize = pageSize * 3 (warm up with three pages on the first load), prefetchDistance = pageSize / 2 (start the next append halfway through the current page), enablePlaceholders = false (this backend has no total count).",
+      "hint": "PagingConfig(pageSize = pageSize, initialLoadSize = pageSize * 3, prefetchDistance = pageSize / 2, enablePlaceholders = false)",
+      "test": "T5PagingConfigTest",
+      "verify": "T5PagingConfigTest is green: pageSize 20 produces initialLoadSize 60 and prefetchDistance 10 with placeholders disabled, and the numbers scale correctly for a different pageSize."
+    }
+  ]
+}

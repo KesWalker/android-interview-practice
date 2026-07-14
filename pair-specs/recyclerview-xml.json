@@ -1,0 +1,55 @@
+{
+  "repoPath": "recyclerview",
+  "repoUrl": "https://github.com/KesWalker/android-interview-practice",
+  "intro": "You're building a RecyclerView list backed by a real XML item layout, using the actual androidx.recyclerview APIs end to end: an adapter and ViewHolder, a DiffUtil.ItemCallback, a payload-driven partial rebind, stable ids, a LayoutManager choice, and view recycling. Each task has a failing test to turn green, and you can run the tests from the gutter in Android Studio as you go.",
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "PersonAdapter - inflate and bind a real XML row",
+      "detail": "Implement PersonAdapter.onCreateViewHolder to inflate R.layout.item_person and wrap it in a PersonViewHolder, and onBindViewHolder to push items[position]'s name and age into that ViewHolder's TextViews.",
+      "hint": "onCreateViewHolder: LayoutInflater.from(parent.context).inflate(R.layout.item_person, parent, false), then PersonViewHolder(view). onBindViewHolder: holder.nameText.text = ...; holder.ageText.text = ....",
+      "test": "T1PersonAdapterTest",
+      "verify": "T1PersonAdapterTest is green: a laid-out RecyclerView shows the right name and age text for each row."
+    },
+    {
+      "id": "t2",
+      "title": "DiffUtil.ItemCallback - same item vs same content",
+      "detail": "Implement PersonDiffCallback.areItemsTheSame (are these two Persons the same real-world row?) and areContentsTheSame (has anything visible actually changed?).",
+      "hint": "areItemsTheSame compares oldItem.id == newItem.id. areContentsTheSame compares full equality, oldItem == newItem, since Person is a data class.",
+      "test": "T2DiffCallbackTest",
+      "verify": "T2DiffCallbackTest is green: reordering rows with unchanged content fires exactly one move and no changes, and editing a field in place fires exactly one change and no moves."
+    },
+    {
+      "id": "t3",
+      "title": "getChangePayload - partial rebind",
+      "detail": "Implement PersonDiffCallback.getChangePayload to describe what changed (here, whether age changed), and PartialRebindAdapter's 3-arg onBindViewHolder(holder, position, payloads) to use that payload to patch just holder.ageText instead of doing a full rebind.",
+      "hint": "getChangePayload returns \"age\" (or any non-null marker) when oldItem.age != newItem.age, else null. The 3-arg onBindViewHolder should check payloads.isEmpty(): if empty, fall back to the full 2-arg onBindViewHolder; if not, only touch holder.ageText.",
+      "test": "T3PartialRebindTest",
+      "verify": "T3PartialRebindTest is green: after an age-only edit, ageText shows the new value, a partial rebind ran, and the full-bind count didn't increase for that row."
+    },
+    {
+      "id": "t4",
+      "title": "Stable ids - why an unstable id breaks move tracking",
+      "detail": "Implement PersonListAdapter.getItemId to return a real persistent identity (getItem(position).id). setHasStableIds(true) is already wired up; the bug this task guards against is returning something derived from position instead of identity, which would make two different rows in the same slot look like the 'same' row.",
+      "hint": "return getItem(position).id",
+      "test": "T4StableIdsTest",
+      "verify": "T4StableIdsTest is green: after a row moves to a new position, RecyclerView's ViewHolder for that row's id is the exact same instance as before the move, not a fresh one."
+    },
+    {
+      "id": "t5",
+      "title": "LayoutManager choice",
+      "detail": "Implement createLayoutManager(context, spanCount) to return a GridLayoutManager(context, spanCount) when spanCount > 1, or a plain vertical LinearLayoutManager(context) otherwise.",
+      "hint": "if (spanCount > 1) GridLayoutManager(context, spanCount) else LinearLayoutManager(context)",
+      "test": "T5LayoutManagerTest",
+      "verify": "T5LayoutManagerTest is green: with spanCount 2 items lay out two-per-row in a grid, and with spanCount 1 they stack in a single column."
+    },
+    {
+      "id": "t6",
+      "title": "View recycling - binding must be idempotent",
+      "detail": "Implement RecyclableAdapter.onBindViewHolder to bind name and age, and set badgeText's visibility (VISIBLE or INVISIBLE) from items[position].isNew in BOTH directions on every call, so a recycled ViewHolder never keeps a stale badge from whatever row it displayed before.",
+      "hint": "Don't only set badgeText visible when isNew is true - also explicitly set it INVISIBLE when isNew is false, since the ViewHolder instance is reused and may already be VISIBLE from an earlier row.",
+      "test": "T6RecyclingTest",
+      "verify": "T6RecyclingTest is green: scrolling far past the visible viewport shows far fewer ViewHolder creations than there are items (proving reuse), and no visible row shows a badge it shouldn't."
+    }
+  ]
+}
