@@ -3,10 +3,15 @@ package extensions
 /**
  * Extension Functions & Properties practice.
  *
- * Each declaration below is unwritten and has a matching test in src/test that
- * is currently RED. Your job, one task at a time, is to write the extension
- * so its test goes GREEN. Run a single test class from the gutter in Android
- * Studio, or run them all with:
+ * Tasks 1-4 are DECLARED BY YOU, from scratch: the whole point of extensions is
+ * the declaration site (the receiver type, the operator modifier, the companion
+ * receiver), so nothing is stubbed for those - you write the full declaration
+ * yourself, top-level in this file. Their tests find your declaration by
+ * reflection once it exists, and until then they fail with a pointer to what's
+ * missing. Tasks 5-6 flip it around: the extensions are already written, and
+ * the lesson is what happens at the CALL SITE.
+ *
+ * Run a single test class from the gutter in Android Studio, or all of them:
  *
  *     ./gradlew :extensions:test
  *
@@ -14,33 +19,32 @@ package extensions
  */
 
 // TODO(t1): T1DisplayNameTest
-// Return this string trimmed, or "Unknown" when the receiver is null or blank.
-fun String?.displayNameOrUnknown(): String {
-    TODO("t1: trim this, or return \"Unknown\" when it's null or blank")
-}
+// Declare an extension FUNCTION named `displayNameOrUnknown` on a NULLABLE
+// String receiver, returning String: the string trimmed, or "Unknown" when the
+// receiver is null or blank. Write the whole declaration yourself, right here.
 
 // TODO(t2): T2WordCountTest
-// Number of whitespace-separated words in this string, or 0 when it's blank.
-val String.wordCount: Int
-    get() = TODO("t2: count whitespace-separated words, 0 when blank")
+// Declare an extension PROPERTY named `wordCount` on String, of type Int: the
+// number of whitespace-separated words, or 0 when the string is blank.
+// Extension properties can't have a backing field - think about what that
+// forces the declaration to look like.
 
 data class Point(val x: Int, val y: Int)
 
 // TODO(t3): T3PointIndexingTest
-// Index 0 yields x, index 1 yields y, any other index is invalid.
-operator fun Point.get(index: Int): Int {
-    TODO("t3: return x for index 0, y for index 1, else throw IndexOutOfBoundsException")
-}
+// Point is a plain data class with no indexing of its own. Declare something
+// top-level that makes `point[0]` return x and `point[1]` return y, with any
+// other index throwing IndexOutOfBoundsException.
 
 class Meters(val value: Double) {
     companion object
 }
 
 // TODO(t4): T4MetersParseTest
-// Parse strings shaped like "5.5m" into a Meters value; anything else is null.
-fun Meters.Companion.parse(raw: String): Meters? {
-    TODO("t4: parse \"<number>m\" into Meters, or null when it doesn't match")
-}
+// Meters has no factory. Declare an extension named `parse` so that
+// `Meters.parse("5.5m")` (called on the TYPE, not an instance) returns
+// Meters(5.5), and returns null for anything that doesn't match "<number>m".
+// Meters already declares an empty companion object - that's your receiver.
 
 open class Shape
 class Circle : Shape()
