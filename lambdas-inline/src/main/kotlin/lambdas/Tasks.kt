@@ -3,10 +3,14 @@ package lambdas
 /**
  * Lambdas & Inline Functions practice.
  *
- * Each function below is unwritten and has a matching test in src/test that is
- * currently RED. Your job, one task at a time, is to fill it in so its test goes
- * GREEN. Run a single test class from the gutter in Android Studio, or run them
- * all with:
+ * Tasks 1-4 are bodies you fill in. Tasks 5 and 6 are DECLARED BY YOU, from
+ * scratch: their whole lesson lives in the declaration's modifiers, and the
+ * compiler itself will teach them to you - declare the function `inline` as
+ * required, then watch what it refuses to let you do with the lambda
+ * parameters, and read its suggestions. Their tests find your declaration by
+ * reflection once it exists.
+ *
+ * Run a single test class from the gutter in Android Studio, or all of them:
  *
  *     ./gradlew :lambdas-inline:test
  */
@@ -34,20 +38,24 @@ fun indexOfFirstNegative(numbers: List<Int>): Int {
 
 // TODO(t4): T4FilterIsInstanceTest
 // Return only the elements of `items` whose runtime type is T, keeping order.
+// This one keeps its signature: `reified` only exists because the body is
+// inlined into the call site - there is no other way this function could know
+// what T is at runtime.
 inline fun <reified T> filterIsInstance2(items: List<Any?>): List<T> {
     TODO("t4: keep only the elements that are actually of type T")
 }
 
 // TODO(t5): T5TimedRunTest
-// Run the given action wrapped inside a Runnable - a real object, not the direct
-// call site - logging "start:<label>" before it runs and "end:<label>" after.
-inline fun timedRun(label: String, log: MutableList<String>, crossinline action: () -> Unit) {
-    TODO("t5: log start:<label>, run the action inside a Runnable, then log end:<label>")
-}
+// Declare, from scratch, an INLINE function
+// `timedRun(label: String, log: MutableList<String>, action: () -> Unit)` that
+// logs "start:<label>", runs `action` from inside a Runnable (a real wrapped
+// object, run immediately - not a bare call), then logs "end:<label>". The
+// compiler will refuse the naive version: an inlined lambda can't cross into
+// another object. Read its error - it names the modifier that fixes it.
 
 // TODO(t6): T6RegisterHandlersTest
-// Call `immediate` right away, then add `deferred` to `store` so it can be run
-// later.
-inline fun registerHandlers(immediate: () -> Unit, noinline deferred: () -> Unit, store: MutableList<() -> Unit>) {
-    TODO("t6: run immediate now and store deferred for later")
-}
+// Declare, from scratch, an INLINE function
+// `registerHandlers(immediate: () -> Unit, deferred: () -> Unit, store: MutableList<() -> Unit>)`
+// that calls `immediate` right away and adds `deferred` to `store` for later.
+// Storing an inlined lambda is impossible - it isn't an object at runtime.
+// Again the compiler names the modifier that opts one parameter back out.
