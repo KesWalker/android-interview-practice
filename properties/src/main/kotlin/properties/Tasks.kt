@@ -1,87 +1,75 @@
 package properties
 
-import kotlin.properties.Delegates
-
 /**
  * Properties, lazy & lateinit practice.
  *
- * Each type below is broken or unwritten and has a matching test in src/test
- * that is currently RED. Your job, one task at a time, is to make the code
- * work as described so its test goes GREEN. Run a single test class from the
- * gutter in Android Studio, or run them all with:
+ * Every property in this module is DECLARED BY YOU, from scratch: the whole
+ * topic is how a property is declared (a delegate, a modifier, a custom
+ * accessor), so none of them are stubbed. Each task's test finds your
+ * declaration by reflection once it exists, and until then it fails with a
+ * pointer to what's missing. The classes and plain functions around them are
+ * given - they're scenario, not the lesson.
+ *
+ * Run a single test class from the gutter in Android Studio, or all of them:
  *
  *     ./gradlew :properties:test
  */
 
 // TODO(t1): T1LazyConfigTest
-// `value` should call `loader` to get its result, but only the first time it's
-// read, no matter how many times it's read after that.
-class LazyConfig(private val loader: () -> String) {
-    val value: String
-        get() = TODO("t1: return loader()'s result, computed once and reused on every later read")
-}
+// Declare a val `value: String` in LazyConfig whose result comes from calling
+// `loader()` - but computed only on the FIRST read, then reused forever. No
+// ordinary getter can do that without hand-rolling a cache; Kotlin ships a
+// delegate for exactly this.
+class LazyConfig(private val loader: () -> String)
 
 // TODO(t2): T2SessionGreetingTest
-// Greet `username` by name once it's been assigned, otherwise greet a stranger.
+// Declare a `username: String` property in UserSession that is assigned some
+// time after construction, is NOT nullable, and throws if read before being
+// set. Then implement greeting(): "Hello, <username>!" once username is set,
+// else "Hello, stranger!" - there's a way to ask whether it's been set yet.
 class UserSession {
-    lateinit var username: String
-
     fun greeting(): String {
-        TODO("t2: return \"Hello, <username>!\" once username is set, else \"Hello, stranger!\"")
+        TODO("t2: greet by name once username is set, else greet a stranger")
     }
 }
 
 // TODO(t3): T3TrimmedBioTest
-// Whatever `bio` is assigned, what's actually stored (and later read back)
-// should have its leading and trailing whitespace removed.
-class Profile {
-    var bio: String = ""
-        set(value) {
-            TODO("t3: store `value` with its leading/trailing whitespace removed")
-        }
-}
+// Declare a var `bio: String` in Profile (starting as "") where whatever is
+// assigned gets stored with its leading/trailing whitespace removed. The
+// transformation happens AT assignment - a custom setter, writing through the
+// backing field.
+class Profile
 
 // TODO(t4): T4TodoListItemsTest
-// Expose the items this class holds as a read-only list, while still letting
-// this class add to them internally via `add`.
+// Declare a val `items: List<String>` in TodoList exposing `_items` read-only
+// to the outside while `add` keeps mutating the same list underneath - the
+// backing-property pattern. The test checks it's a live view, not a copy.
 class TodoList {
     private val _items = mutableListOf<String>()
-
-    val items: List<String>
-        get() = TODO("t4: expose the stored items")
 
     fun add(item: String) {
         _items.add(item)
     }
 }
 
-class RetryPolicy {
-    var maxAttempts: Int by Delegates.notNull()
-}
-
 // TODO(t5): T5ConfiguredAttemptsTest
-// Return `policy.maxAttempts`. RetryPolicy uses `by Delegates.notNull<Int>()`
-// instead of lateinit, since lateinit can't hold a primitive Int.
-fun configuredAttempts(policy: RetryPolicy): Int {
-    TODO("t5: return the policy's configured maxAttempts")
-}
+// Declare a var `maxAttempts: Int` in RetryPolicy that is assigned after
+// construction and throws IllegalStateException if read first. lateinit can't
+// do it - it doesn't work for primitive types like Int. The standard library
+// has a delegate for this one too.
+class RetryPolicy
 
 // TODO(t6): T6RectangleAreaTest
-// `area` should always reflect the rectangle's *current* width and height -
-// implement its getter, with no stored/cached value.
-class Rectangle(var width: Int, var height: Int) {
-    val area: Int
-        get() = TODO("t6: compute the area fresh from the current width and height")
-}
+// Declare a val `area: Int` in Rectangle that always reflects the CURRENT
+// width and height - no stored value, no cache, recomputed on every read.
+class Rectangle(var width: Int, var height: Int)
 
 // TODO(t7): T7AccountTest
-// Implement deposit and withdraw so they adjust balance from inside the class,
-// clamping withdrawals at 0. balance's setter is already private, so this is
-// the only place allowed to change it.
+// Declare a var `balance: Int` in Account, starting at 0, that anyone can
+// READ but only Account itself can CHANGE - the test fails if it finds a
+// public setter. Then implement deposit and withdraw (clamping at 0), the
+// only code allowed to touch it.
 class Account {
-    var balance: Int = 0
-        private set
-
     fun deposit(amount: Int) {
         TODO("t7: add `amount` to the balance")
     }
