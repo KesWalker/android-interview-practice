@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 
 // One module per topic. Each is self-contained: open the root once in Android
 // Studio (or IntelliJ) and run any topic on its own.
+include(":nothing-any")
 include(":null-safety")
 include(":coroutines-basics")
 include(":extensions")
